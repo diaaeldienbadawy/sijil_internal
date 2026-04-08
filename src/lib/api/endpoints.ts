@@ -1,0 +1,24 @@
+const API_URL = process.env.NEXT_PUBLIC_API_URL!;
+const API_VER = process.env.NEXT_PUBLIC_API_VER!;
+
+const buildBase = (path: string) => {
+  return `${API_URL}${API_VER}${path}`;
+}
+
+const withQuery = (path: string, params?: Record<string, string | number | boolean | undefined>): string => {
+  const search = new URLSearchParams();
+
+  Object.entries(params ?? {}).forEach(([key, value]) => {
+    if (value !== undefined)
+      search.append(key, String(value));
+  });
+
+  const query = search.toString();
+  return query ? `${path}?${query}` : path;
+};
+
+export const API_ENDPOINTS = {
+    AUTH:{
+        LOGIN : buildBase('/auth/token')
+    }
+}

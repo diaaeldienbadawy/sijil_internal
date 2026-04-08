@@ -1,0 +1,303 @@
+---
+- name: Deploy container from GHCR (Docker CLI)
+  hosts: web
+  become: true
+  become_method: sudo
+  gather_facts: true
+
+  vars:
+    apt_lock_timeout: 120
+
+  pre_tasks:
+    - name: Assert required vars
+      ansible.builtin.assert:
+        that:
+          - image is defined
+          - ghcr_user is defined
+          - ghcr_pat is defined
+          - (image | string | length) > 0
+          - (ghcr_user | string | length) > 0
+          - (ghcr_pat | string | length) > 0
+        fail_msg: "Missing required vars: image, ghcr_user, ghcr_pat"
+
+    - name: Build deployment variables (safe defaults)
+      ansible.builtin.set_fact:
+        deploy_image: "{{ image }}"
+        deploy_ghcr_user: "{{ ghcr_user }}"
+        deploy_ghcr_pat: "{{ ghcr_pat }}"
+        deploy_container_name: "{{ container_name | default('tenders-frontend') }}"
+        deploy_host_port: "{{ host_port | default('3111') }}"
+        deploy_container_port: "{{ container_port | default('3111') }}"
+        deploy_force_free_port: "{{ force_free_port | default(true) }}"
+        deploy_prune_images: "{{ prune_images | default(true) }}"
+
+    - name: Check docker exists
+      ansible.builtin.command: docker --version
+      register: docker_cli
+      changed_when: false
+      failed_when: false
+
+    - name: Install Docker Engine (official repo) if missing (Debian/Ubuntu)
+      when: docker_cli.rc != 0
+      block:
+        - name: Ensure OS is Debian family
+          ansible.builtin.assert:
+            that:
+              - ansible_facts.os_family == "Debian"
+            fail_msg: "Auto-install supports Debian/Ubuntu only. Install Docker manually for this OS."
+
+        - name: Unhold held packages (best effort)
+          ansible.builtin.shell: |
+            holds="$(apt-mark showhold || true)"
+            if [ -n "$holds" ]; then
+              echo "$holds" | xargs -r apt-mark unhold
+            fi
+          changed_when: false
+          failed_when: false
+
+        - name: Remove conflicting packages (best effort)
+          ansible.builtin.apt:
+            name:
+              - docker.io
+              - docker-doc
+              - docker-compose
+              - docker-compose-v2
+              - podman-docker
+              - containerd
+              - runc
+            state: absent
+            purge: true
+            autoremove: true
+            lock_timeout: "{{ apt_lock_timeout }}"
+          ignore_errors: true
+
+        - name: Install prerequisites
+          ansible.builtin.apt:
+            name:
+              - ca-certificates
+              - curl
+              - gnupg
+              - iproute2
+            state: present
+            update_cache: yes
+            cache_valid_time: 3600
+            lock_timeout: "{{ apt_lock_timeout }}"
+
+        - name: Ensure keyrings directory exists
+          ansible.builtin.file:
+            path: /etc/apt/keyrings
+            state: directory
+            mode: "0755"
+
+        - name: Download Docker GPG key (keyring)
+          ansible.builtin.get_url:
+            url: "https://download.docker.com/linux/{{ ansible_facts.distribution | lower }}/gpg"
+            dest: /etc/apt/keyrings/docker.gpg
+            mode: "0644"
+
+        - name: Add Docker apt repository (official, signed-by)
+          ansible.builtin.apt_repository:
+            repo: >-
+              deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg]
+              https://download.docker.com/linux/{{ ansible_facts.distribution | lower }}
+              {{ ansible_facts.distribution_release }} stable
+            state: present
+            filename: docker
+
+        - name: Update apt cache after adding Docker repo
+          ansible.builtin.apt:
+            update_cache: yes
+            lock_timeout: "{{ apt_lock_timeout }}"
+
+        - name: Install Docker Engine + Compose plugin
+          ansible.builtin.apt:
+            name:
+              - docker-ce
+              - docker-ce-cli
+              - containerd.io
+              - docker-buildx-plugin
+              - docker-compose-plugin
+            state: present
+            lock_timeout: "{{ apt_lock_timeout }}"
+
+        - name: Enable & start Docker service
+          ansible.builtin.service:
+            name: docker
+            state: started
+            enabled: yes
+
+    - name: Verify docker available
+      ansible.builtin.command: docker --version
+      register: docker_cli_after
+      changed_when: false
+      failed_when: docker_cli_after.rc != 0
+
+    - name: Ensure ss (iproute2) exists (Debian/Ubuntu best effort)
+      ansible.builtin.command: ss -h
+      register: ss_check
+      changed_when: false
+      failed_when: false
+
+    - name: Install iproute2 if ss missing (Debian/Ubuntu)
+      when: ss_check.rc != 0 and ansible_facts.os_family == "Debian"
+      ansible.builtin.apt:
+        name: iproute2
+        state: present
+        update_cache: yes
+        lock_timeout: "{{ apt_lock_timeout }}"
+
+  tasks:
+    - name: Login to GHCR (safe password-stdin)
+      ansible.builtin.shell: |
+        set -e
+        echo "{{ deploy_ghcr_pat }}" | docker login ghcr.io -u "{{ deploy_ghcr_user }}" --password-stdin
+      no_log: true
+      changed_when: false
+
+    - name: Pull image
+      ansible.builtin.command:
+        argv:
+          - docker
+          - pull
+          - "{{ deploy_image }}"
+      register: pull_res
+      changed_when: >
+        ('Downloaded newer image' in (pull_res.stdout | default('')))
+        or ('Pull complete' in (pull_res.stdout | default('')))
+        or ('Status: Downloaded newer image' in (pull_res.stdout | default('')))
+      failed_when: pull_res.rc != 0
+
+    - name: Stop and remove old container by name if exists
+      ansible.builtin.shell: |
+        set +e
+        docker rm -f "{{ deploy_container_name }}" >/dev/null 2>&1
+        exit 0
+      changed_when: false
+      failed_when: false
+
+    - name: Find docker containers publishing host_port
+      ansible.builtin.command:
+        argv:
+          - docker
+          - ps
+          - --filter
+          - "publish={{ deploy_host_port }}"
+          - --format
+          - "{{'{{'}}.Names{{'}}'}}"
+      register: pub_containers
+      changed_when: false
+      failed_when: false
+
+    - name: Remove conflicting containers on host_port (best effort)
+      when: deploy_force_free_port | bool
+      ansible.builtin.command:
+        argv:
+          - docker
+          - rm
+          - -f
+          - "{{ item }}"
+      loop: "{{ (pub_containers.stdout_lines | default([])) | difference([deploy_container_name]) }}"
+      register: rm_conflicts
+      changed_when: false
+      failed_when: false
+
+    - name: Check host port listener (ss)
+      ansible.builtin.shell: |
+        set -e
+        ss -lntp "( sport = :{{ deploy_host_port }} )" 2>/dev/null | tail -n +2 || true
+      register: ss_port
+      changed_when: false
+      failed_when: false
+
+    - name: Fail if host_port still in use
+      ansible.builtin.fail:
+        msg: |
+          Host port {{ deploy_host_port }} is still in use.
+          ss output:
+          {{ ss_port.stdout | default('') }}
+
+          Fix options:
+          - Change host_port (e.g. -e host_port=3101), OR
+          - Stop the process/container holding it.
+      when: (ss_port.stdout | default('') | length) > 0
+
+    - name: Run container (restart always)
+      ansible.builtin.command:
+        argv:
+          - docker
+          - run
+          - -d
+          - --name
+          - "{{ deploy_container_name }}"
+          - --restart=always
+          - -p
+          - "{{ deploy_host_port }}:{{ deploy_container_port }}"
+          - "{{ deploy_image }}"
+      register: run_res
+      changed_when: run_res.rc == 0
+      failed_when: false
+
+    - name: Diagnostics if docker run failed
+      when: run_res.rc != 0
+      block:
+        - name: docker ps (published port)
+          ansible.builtin.command:
+            argv:
+              - docker
+              - ps
+              - --filter
+              - "publish={{ deploy_host_port }}"
+              - --format
+              - "table {{'{{'}}.Names{{'}}'}}\t{{'{{'}}.Image{{'}}'}}\t{{'{{'}}.Ports{{'}}'}}"
+          register: diag_ps
+          changed_when: false
+          failed_when: false
+
+        - name: ss listener
+          ansible.builtin.shell: |
+            ss -lntp "( sport = :{{ deploy_host_port }} )" 2>/dev/null || true
+          register: diag_ss
+          changed_when: false
+          failed_when: false
+
+        - name: Fail with details
+          ansible.builtin.fail:
+            msg: |
+              docker run failed (rc={{ run_res.rc }}).
+              stderr:
+              {{ run_res.stderr | default('') }}
+
+              docker ps publish={{ deploy_host_port }}:
+              {{ diag_ps.stdout | default('') }}
+
+              ss:
+              {{ diag_ss.stdout | default('') }}
+
+    - name: Prune unused images
+      when: deploy_prune_images | bool
+      ansible.builtin.command:
+        argv: [docker, image, prune, -f]
+      changed_when: false
+      failed_when: false
+
+    - name: Show running container
+      ansible.builtin.command:
+        argv:
+          - docker
+          - ps
+          - --filter
+          - "name={{ deploy_container_name }}"
+          - --format
+          - "{{'{{'}}.Names{{'}}'}} {{'{{'}}.Image{{'}}'}} {{'{{'}}.Status{{'}}'}} {{'{{'}}.Ports{{'}}'}}"
+      register: ps_out
+      changed_when: false
+      failed_when: false
+
+    - name: Deploy summary
+      ansible.builtin.debug:
+        msg: |
+          Deployed:
+          - container: {{ deploy_container_name }}
+          - image: {{ deploy_image }}
+          - ports: {{ deploy_host_port }} -> {{ deploy_container_port }}
+          - status: {{ ps_out.stdout | default('') }}

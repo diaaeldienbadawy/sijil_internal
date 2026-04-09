@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root{
+    --color-primary: #1a472a;
+    --color-primary-light: #2d5a3d;
+    --color-primary-dark: #0f2817;
+    --color-gold: #c9a227;
+    --color-gold-light: #e6c556;
+    --color-bg-cream: #f8f5f0;
+    --color-bg-paper: #fffef9;
+    --color-text-dark: #1a1a1a;
+    --color-text-muted: #5a5a5a;
+    --color-border: #d4cfc5;
+    --color-error: #c0392b;
+    --color-alert: #eeee11;
+    --color-success: #009900;
+}
+
+/*
+        primary: "var(--color-primary)",
+        "primary-light": "var(--color-primary-light)",
+        "primary-dark": "var(--color-primary-dark)",
+        gold: "var(--color-gold)",
+        "gold-light": "var(--color-gold-light)",
+        cream: "var(--color-cream)",
+        paper: "var(--color-paper)",
+        error: "var(--color-error)",
+        alert: "var(--color-alert)",
+        success: "var(--color-success)"
+
+*/

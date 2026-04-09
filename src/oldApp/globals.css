@@ -4,7 +4,9 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
+@import "tw-animate-css";
 
+@import "shadcn/tailwind.css";
 
 :root {
   --primary: #1a472a;
@@ -18,40 +20,88 @@
   --text-muted: #5a5a5a;
   --border: #d4cfc5;
   --shadow: rgba(26, 71, 42, 0.1);
-
-  --brand: #1a472a;
-  --brand-light: #2d5a3d;
-  --brand-lighter: #e0f2fe;
-  --brand-dark: #0f2817;
-  --accent: #c9a227;
-  --accent-light: #e6c556;
-  --surface: #ffffff;
-  --surface-dim: #f8fafc;
-  --surface-hover: #f1f5f9;
-  --border: #e2e8f0;
-  --border-strong: #f8f5f0;
-  --text: #0f2817;
-  --text-2: #e6c556;
-  --text-3: #2d5a3d;
-  --success: #059669;
-  --success-bg: #ecfdf5;
-  --warn: #d97706;
-  --warn-bg: #fffbeb;
-  --danger: #dc2626;
-  --danger-bg: #fef2f2;
-  --radius: 10px;
-  --radius-sm: 6px;
-  --radius-lg: 14px;
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.03), 0 1px 3px 0 rgb(0 0 0 / 0.04);
-  --shadow-md: 0 2px 8px -2px rgb(0 0 0 / 0.06), 0 4px 12px -2px rgb(0 0 0 / 0.04);
-  --shadow-lg: 0 4px 16px -4px rgb(0 0 0 / 0.08), 0 8px 24px -4px rgb(0 0 0 / 0.04);
-  --focus-ring: 0 0 0 3px rgba(8, 145, 178, 0.15);
 }
 
 @layer base {
-  * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-  body { font-family: 'IBM Plex Sans Arabic', 'Noto Kufi Arabic', system-ui, sans-serif; background: var(--surface-dim); color: var(--text); line-height: 1.7; }
+  * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    @apply border-border outline-ring/50; }
+  body { font-family: 'IBM Plex Sans Arabic', 'Noto Kufi Arabic', system-ui, sans-serif; background: var(--surface-dim); color: var(--text); line-height: 1.7;
+    @apply bg-background text-foreground; }
   ::selection { background: var(--accent-light); color: var(--brand-dark); }
+  .theme {
+    --font-heading: var(--font-sans);
+    --font-sans: var(--font-sans);
+  }
+  :root {
+    --background: oklch(1 0 0);
+    --foreground: oklch(0.145 0 0);
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.145 0 0);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.145 0 0);
+    --primary: oklch(0.205 0 0);
+    --primary-foreground: oklch(0.985 0 0);
+    --secondary: oklch(0.97 0 0);
+    --secondary-foreground: oklch(0.205 0 0);
+    --muted: oklch(0.97 0 0);
+    --muted-foreground: oklch(0.556 0 0);
+    --accent: oklch(0.97 0 0);
+    --accent-foreground: oklch(0.205 0 0);
+    --destructive: oklch(0.577 0.245 27.325);
+    --border: oklch(0.922 0 0);
+    --input: oklch(0.922 0 0);
+    --ring: oklch(0.708 0 0);
+    --chart-1: oklch(0.87 0 0);
+    --chart-2: oklch(0.556 0 0);
+    --chart-3: oklch(0.439 0 0);
+    --chart-4: oklch(0.371 0 0);
+    --chart-5: oklch(0.269 0 0);
+    --radius: 0.625rem;
+    --sidebar: oklch(0.985 0 0);
+    --sidebar-foreground: oklch(0.145 0 0);
+    --sidebar-primary: oklch(0.205 0 0);
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.97 0 0);
+    --sidebar-accent-foreground: oklch(0.205 0 0);
+    --sidebar-border: oklch(0.922 0 0);
+    --sidebar-ring: oklch(0.708 0 0);
+  }
+  .dark {
+    --background: oklch(0.145 0 0);
+    --foreground: oklch(0.985 0 0);
+    --card: oklch(0.205 0 0);
+    --card-foreground: oklch(0.985 0 0);
+    --popover: oklch(0.205 0 0);
+    --popover-foreground: oklch(0.985 0 0);
+    --primary: oklch(0.922 0 0);
+    --primary-foreground: oklch(0.205 0 0);
+    --secondary: oklch(0.269 0 0);
+    --secondary-foreground: oklch(0.985 0 0);
+    --muted: oklch(0.269 0 0);
+    --muted-foreground: oklch(0.708 0 0);
+    --accent: oklch(0.269 0 0);
+    --accent-foreground: oklch(0.985 0 0);
+    --destructive: oklch(0.704 0.191 22.216);
+    --border: oklch(1 0 0 / 10%);
+    --input: oklch(1 0 0 / 15%);
+    --ring: oklch(0.556 0 0);
+    --chart-1: oklch(0.87 0 0);
+    --chart-2: oklch(0.556 0 0);
+    --chart-3: oklch(0.439 0 0);
+    --chart-4: oklch(0.371 0 0);
+    --chart-5: oklch(0.269 0 0);
+    --sidebar: oklch(0.205 0 0);
+    --sidebar-foreground: oklch(0.985 0 0);
+    --sidebar-primary: oklch(0.488 0.243 264.376);
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.269 0 0);
+    --sidebar-accent-foreground: oklch(0.985 0 0);
+    --sidebar-border: oklch(1 0 0 / 10%);
+    --sidebar-ring: oklch(0.556 0 0);
+  }
+  html {
+    @apply font-sans;
+  }
 }
 
 @layer components {

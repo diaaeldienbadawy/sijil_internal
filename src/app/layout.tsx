@@ -1,27 +1,23 @@
-import type { Metadata, Viewport } from 'next';
-import './globals.css';
-import { AuthProvider } from '@/contexts/AuthContext';
-import { QueryProvider } from '@/contexts/QueryProvider';
+import MutatingDots from "@/components/utility/spinners/mutating-dots";
+import StoreProvider from "@/lib/redux/store-provider";
+import { ReactNode, Suspense } from "react";
+import '../styles/globals.css';
+import { Geist } from "next/font/google";
+import { cn } from "@/lib/utils";
 
-export const metadata: Metadata = {
-  title: 'بوابة المنافسات — البحث والتحليل',
-  description: 'منصة متقدمة للبحث والاستعلام وتحليل المنافسات والمشتريات الحكومية في المملكة العربية السعودية',
-  keywords: 'منافسات, مشتريات حكومية, اعتماد, ترسيات, عطاءات',
-};
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
-export const viewport: Viewport = {
-  themeColor: '#0c4a6e',
-  width: 'device-width',
-  initialScale: 1,
-};
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="ar" dir="rtl">
-      <head>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📋</text></svg>" />
-      </head>
-      <body><QueryProvider><AuthProvider>{children}</AuthProvider></QueryProvider></body>
-    </html>
-  );
+export default function RootLayout({ children }: Readonly<{ children: ReactNode }>){
+    return(
+        <html lang="ar" className={cn("font-sans", geist.variable)}>
+            <body>
+                <Suspense fallback={<MutatingDots/>}>
+                    <StoreProvider>
+                        {children}
+                    </StoreProvider>
+                </Suspense>
+            </body>
+        </html>
+    )
 }

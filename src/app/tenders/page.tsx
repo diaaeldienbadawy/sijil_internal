@@ -3,11 +3,11 @@
 import React, { useState, useEffect, useCallback, useMemo, Suspense, useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
-import { useAuth } from '@/contexts/AuthContext';
 import { getTenders, getAllTenderIds, getTenderDetailsBatch } from '@/lib/api';
 import type { TenderSearchMode, TenderListParams, Tender, TenderMin } from '@/types';
 import { format, parseISO } from 'date-fns';
 import { ar } from 'date-fns/locale';
+import { useAuth } from '@/contexts/AuthContext';
 
 const SEARCH_MODE_INFO: Record<TenderSearchMode, { label: string; help: string }> = {
   tokens: { label: 'كلمات', help: 'جميع الكلمات يجب أن تظهر (بأي ترتيب)' },

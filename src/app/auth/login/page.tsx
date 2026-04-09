@@ -1,4 +1,5 @@
 'use client';
+import LoginCard from '@/components/auth/login/login-card';
 import React, { useState, useEffect } from 'react';
 
 export default function LoginPage() {
@@ -8,8 +9,8 @@ export default function LoginPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   return (
-    <div className='bg-primary w-full h-full'>
-      
+    <div className='bg-primary w-full h-full flex flex-col'>
+      <LoginCard/>
     </div>
   )
 

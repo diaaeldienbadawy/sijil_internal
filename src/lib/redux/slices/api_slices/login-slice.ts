@@ -10,7 +10,7 @@ export const loginSlice = createSlice(
         extraReducers:(builder)=>{
             builder.addCase(loginRequest.pending,(state)=>{
                 state.isLoading = true;
-                state.error = null;
+                state.error = undefined;
             })
             .addCase(loginRequest.rejected, (state,action)=>{
                 state.isLoading = false;
@@ -18,7 +18,7 @@ export const loginSlice = createSlice(
             })
             .addCase(loginRequest.fulfilled, (state,action)=>{
                 state.isLoading = false;
-                state.error = '';
+                state.error = undefined;
                 state.data = action.payload
             })
         }

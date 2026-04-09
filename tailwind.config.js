@@ -1,10 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/auth/login/*.{js,ts,jsx,tsx,mdx}',
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
+    "./node_modules/radix-ui/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
@@ -14,13 +12,19 @@ module.exports = {
         "primary-dark": "var(--color-primary-dark)",
         gold: "var(--color-gold)",
         "gold-light": "var(--color-gold-light)",
+        muted:"var(--color-text-muted)",
         cream: "var(--color-cream)",
         paper: "var(--color-paper)",
         error: "var(--color-error)",
         alert: "var(--color-alert)",
-        success: "var(--color-success)"
+        success: "var(--color-success)",
+        ring:"var(--color-border)"
       },
     },
+    fontFamily:{
+      tajawal:"var(--tajawal-font-family)",
+      amiri: "var(--amiri-font-family)"
+    }
   },
   plugins: [
     function ({ addUtilities, theme }) {

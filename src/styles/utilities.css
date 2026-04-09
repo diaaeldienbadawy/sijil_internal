@@ -1,1 +1,18 @@
 @tailwind utilities;
+
+@layer utilities {
+    .chess-bg{
+        position: relative;
+    }
+    .chess-bg::before{
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30z' fill='%23ffffff' fill-opacity='0.045'/%3E%3C/svg%3E");
+        pointer-events: none;
+    }
+
+    .shadow-deep{
+        box-shadow:rgba(0, 0, 0, 0.521) 0px 0px 50px 0.05px;
+    }
+}

@@ -1,22 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { getInitialApiState } from "../../ApiActionState"
-import { loginRequest, LoginResponse } from "@/lib/api/requests/login-request"
+import { TenderListResponse } from "@/types"
+import { getTenders } from "@/lib/api/requests/get-tenders"
 
-export const loginSlice = createSlice(
+export const tendersSlice = createSlice(
     {
-        name:'login', 
-        initialState : getInitialApiState<LoginResponse>(),
+        name:'tenders', 
+        initialState : getInitialApiState<TenderListResponse>(),
         reducers:{},
         extraReducers:(builder)=>{
-            builder.addCase(loginRequest.pending,(state)=>{
+            builder.addCase(getTenders.pending,(state)=>{
                 state.isLoading = true;
                 state.error = undefined;
             })
-            .addCase(loginRequest.rejected, (state,action)=>{
+            .addCase(getTenders.rejected, (state,action)=>{
                 state.isLoading = false;
                 state.error = action.error.message || "Api Failed"
             })
-            .addCase(loginRequest.fulfilled, (state,action)=>{
+            .addCase(getTenders.fulfilled, (state,action)=>{
                 state.isLoading = false;
                 state.error = undefined;
                 state.data = action.payload

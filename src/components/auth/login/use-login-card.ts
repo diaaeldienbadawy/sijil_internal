@@ -1,5 +1,8 @@
 import { loginRequest } from "@/lib/api/requests/login-request";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
+import { redirect } from "next/navigation";
+import { useRouter } from 'next/navigation'
+import { NextResponse } from "next/server";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -9,13 +12,31 @@ export default function useLoginCard(){
     const [error, setError] = useState<string|undefined>()
     const [remember, setRemember] = useState<boolean>()
 
-    const selector = useAppSelector(state=>state.login)
+    const router = useRouter()
+
+    const {data ,isLoading, error:dataError} = useAppSelector(state=>state.login)
     const dispatch = useAppDispatch()
 
     useEffect(()=>{
-        setError(selector.error)
-        setError("خطأ خطأ خطأ خطأ خطأ")
+        setError(dataError)
     },[])
+
+    useEffect(()=>{
+        onSuccessLogin()
+    },[data])
+
+    const onSuccessLogin = async()=>{
+        console.log("data changed", data)
+        if(data){
+            console.log("data is", data)
+            if(data.access_token) {
+                console.log("accessToken is", data.access_token)
+                await cookieStore.set('access_token', data.access_token)
+                router.push('http://localhost:3000/tenders')
+                //NextResponse.redirect('/tenders')
+            }
+        }
+    }
 
     const validate=():boolean=>{
         if(!username) {
@@ -36,6 +57,7 @@ export default function useLoginCard(){
 
     const loginAction = async()=>{
         if(validate()){
+            setError(undefined)
             dispatch(loginRequest({username: username!,password:password!}))
         }
     }
@@ -46,6 +68,7 @@ export default function useLoginCard(){
         password,
         setPassword,
         error,
+        isLoading,
         remember,
         setRemember,
         loginAction,

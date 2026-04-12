@@ -15,4 +15,11 @@
     .shadow-deep{
         box-shadow:rgba(0, 0, 0, 0.521) 0px 0px 50px 0.05px;
     }
+
+    .bg-gold-light{
+        background: radial-gradient(circle at top right, white -20%, var(--color-gold-light) 40%, var(--color-gold-light) 100%);
+    }
+    .bg-gold{
+        background: radial-gradient(circle at top right, white -20%, var(--color-gold) 40%, var(--color-gold) 100%);
+    }
 }

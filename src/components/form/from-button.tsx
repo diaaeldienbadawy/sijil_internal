@@ -9,23 +9,22 @@ interface Props{
     text: string
     className?: string
     isDisabled?:boolean
-    action:()=>Promise<void>
+    isLoading?:boolean
+    isSubmit?:boolean
+    action?:()=>Promise<void>
 }
-export default function FormButton({varient,text,className,isDisabled,size='default',action}:Props){
-    const [isLoading,setIsLoading] = useState<boolean>(false)
-
-    const handleClick = async()=>{
-        setIsLoading(true)
-        
-        setTimeout(()=>setIsLoading(false),5000)
-        
-        //await action()
-        //setIsLoading(false)
-    }
+export default function FormButton({varient,text,className,isDisabled,isSubmit,isLoading,size='default',action}:Props){
 
     return(
         <div className="flex justify-center">
-            <Button variant={varient} size={size} className={`w-[90%] mx-auto py-2 font-tajawal font-semibold cursor-pointer  ${className}`} disabled={isLoading||isDisabled} onClick={handleClick}>
+            <Button 
+                variant={varient} 
+                size={size} 
+                className={`w-[90%] mx-auto py-2 font-tajawal font-semibold cursor-pointer  ${className}`} 
+                disabled={isLoading||isDisabled} 
+                onClick={action}
+                type={isSubmit?'submit':'button'}
+                >
                 {isLoading ? <Spinner data-icon="inline-start" /> : null}
                 {text}
             </Button>

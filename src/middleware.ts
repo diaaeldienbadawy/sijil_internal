@@ -1,13 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export default function middleware(request:NextRequest){
-    console.log('entered middleware')
-    
-    if(request.url.endsWith('/auth/login')) return NextResponse.next()
+    const { pathname } = request.nextUrl;
 
-    console.log('entered middleware1')
+    if (
+      pathname.startsWith('/_next') ||
+      pathname.startsWith('/api') ||
+      pathname.includes('.')
+    ) {
+      return;
+    }
 
-    const token = request.cookies.get('accessToken')
+    if(pathname.endsWith('/auth/login')) return NextResponse.next()
+
+    const token = request.cookies.get('access_token')
+
+    console.log("token ",token)
 
     if(!token){
         return NextResponse.redirect(new URL('/auth/login', request.url))

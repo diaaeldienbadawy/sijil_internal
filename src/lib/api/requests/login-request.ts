@@ -8,12 +8,12 @@ export interface LoginPayload{
 }
 
 export interface LoginResponse{
-    accessToken:string
+    access_token:string
 }
 
 export const loginRequest = createAsyncThunk(
     'login',
     async(data:LoginPayload)=>{
-        return FetchHelper.post<LoginPayload,LoginResponse>(API_ENDPOINTS.AUTH.LOGIN,{data: data});
+        return FetchHelper.postForm<LoginPayload,LoginResponse>(API_ENDPOINTS.AUTH.LOGIN, data);
     }
 )

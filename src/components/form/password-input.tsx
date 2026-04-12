@@ -1,6 +1,6 @@
 
 import { EyeIcon, EyeOffIcon } from "lucide-react"
-import { Dispatch, SetStateAction, useState } from "react"
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react"
 
 interface Props{
     className?: string
@@ -15,6 +15,16 @@ interface Props{
 export default function PasswordInput({className,id,value,setValue,placeholder,showPassword}:Props){
     const [hidden,setHidden] = useState<boolean>(true)
 
+    const ref = useRef<HTMLInputElement>(null)
+
+    useEffect(()=>{ 
+        if(ref.current){
+            if(ref.current.value){
+                setValue?.(ref.current.value ?? value)
+            }
+        }
+    },[])
+
     return(
         <div className="relative p-0">
             {
@@ -25,9 +35,16 @@ export default function PasswordInput({className,id,value,setValue,placeholder,s
                     </div>
                 </div>:null
             }
-            <input id={id} type={hidden ? 'password' : 'text'} className={`${className}`} value={value} placeholder={placeholder} onChange={e=>setValue?.(e.target.value)}/>
-
+            <input
+                ref={ref}
+                id={id} 
+                type={hidden ? 'password' : 'text'} 
+                className={`${className}`} 
+                value={value ?? ""} 
+                placeholder={placeholder} 
+                onChange={e=>setValue?.(e.target.value)}
+                onInput={(e) => setValue?.((e.target as HTMLInputElement).value)}    
+            />
         </div>
-
     )
 }

@@ -3,6 +3,7 @@ import useLoginCard from "./use-login-card";
 import LayersIcon from "@/components/svg-icons/layers-icon";
 import LabeledInput from "@/components/form/labeled-input";
 import FormButton from "@/components/form/from-button";
+import { Form } from "lucide-react";
 
 export default function LoginCard(){
     const {
@@ -10,6 +11,7 @@ export default function LoginCard(){
         password,
         remember,
         error,
+        isLoading,
         setUserName,
         setPassword,
         setRemember,
@@ -31,15 +33,17 @@ export default function LoginCard(){
                     </div>
                 </div>
                 <div className="bg-paper py-5">
-                    <div className="text-red-500 py-2 font-tajawal text-center">
-                        <h5>{error}</h5>
-                    </div>
-                    <LabeledInput lable="اسم المستخدم" placeholder="ادخل اسم المستخدم" value={username} setValue={setUserName} />
-                    <LabeledInput lable="كلمة السر" placeholder="ادخل كلمة السر" type="password" value={password} setValue={setPassword} />
-                    <LabeledInput dir="horizontal" lable="تذكرني" type="checkbox" checked={remember} setChecked={setRemember} />
-                    <div className="py-6">
-                        <FormButton varient="default" size="xxxl" className="text-paper text-xl rounded-xl" text="تسجيل دخول" action={loginAction} />
-                    </div>
+                    <form onSubmit={(e)=>{e.preventDefault();loginAction();}}>
+                        <div className="text-red-500 py-2 font-tajawal text-center">
+                            <h5>{error}</h5>
+                        </div>
+                        <LabeledInput lable="اسم المستخدم" placeholder="ادخل اسم المستخدم" value={username} setValue={setUserName} />
+                        <LabeledInput lable="كلمة السر" placeholder="ادخل كلمة السر" type="password" value={password} setValue={setPassword} />
+                        {/* <LabeledInput dir="horizontal" lable="تذكرني" type="checkbox" checked={remember} setChecked={setRemember} /> */}
+                        <div className="py-6">
+                            <FormButton isSubmit={true} varient="default" size="xxxl" className="text-paper text-xl rounded-xl" text="تسجيل دخول" isLoading={isLoading} />
+                        </div>
+                    </form>
                 </div>
                 <div className="flex bg-cream p-5 border border-t-gray-300">
                     <div className="m-auto text-primary-light">

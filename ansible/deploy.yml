@@ -217,7 +217,7 @@
           {{ ss_port.stdout | default('') }}
 
           Fix options:
-          - Change host_port (e.g. -e host_port=3101), OR
+          - Change host_port (e.g. -e host_port=3000), OR
           - Stop the process/container holding it.
       when: (ss_port.stdout | default('') | length) > 0
 

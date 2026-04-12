@@ -1,0 +1,1 @@
+export type TenderSearchMode = 'smart' | 'phrase' | 'tokens';

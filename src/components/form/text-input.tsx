@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react"
+import { DetailedHTMLProps, Dispatch, InputHTMLAttributes, SetStateAction, useEffect, useRef } from "react"
 
 interface Props{
     className?: string
@@ -9,7 +9,24 @@ interface Props{
 }
 
 export default function TextInput({className,id,value,setValue,placeholder}:Props){
+    const ref = useRef<HTMLInputElement>(null)
+    
+    useEffect(()=>{ 
+        if(ref.current){
+            if(ref.current.value){
+                setValue?.(ref.current.value ?? value)
+            }
+        }
+    },[])
+
     return(
-        <input id={id} className={`${className}`} value={value} placeholder={placeholder} onChange={e=>setValue?.(e.target.value)}/>
+        <input 
+            ref={ref}
+            id={id} 
+            className={`${className}`} 
+            value={value ?? ""} 
+            placeholder={placeholder} 
+            onChange={e=>setValue?.(e.target.value)}
+        />
     )
 }

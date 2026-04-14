@@ -9,7 +9,7 @@ export default function PopoverDialog({content,hasCloseButton}:Props){
     return(
         <div className="popover-dialog">
             <div className="dialog-card">
-
+                {content}
             </div>
         </div>
     )

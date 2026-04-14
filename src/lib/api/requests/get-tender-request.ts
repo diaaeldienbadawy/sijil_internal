@@ -5,7 +5,7 @@ import TenderListParams from "../params/tender-list-params";
 import { Tender } from "@/lib/models/tender";
 
 export const getTender = createAsyncThunk(
-    'tenders',
+    'tender',
     async(id:string)=>{
         return FetchHelper.get<Tender>(API_ENDPOINTS.TENDER.TENDER(id),{needAuthorization:true})
     }

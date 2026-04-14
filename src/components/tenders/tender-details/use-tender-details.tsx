@@ -2,16 +2,14 @@ import { getTender } from "@/lib/api/requests/get-tender-request"
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks"
 import { useEffect } from "react"
 
-interface Props{
-    id: string
-}
-export default function useTenderDetails({id}:Props){
+export default function useTenderDetails(){
     const {data,isLoading, error} = useAppSelector(state=>state.tender)
+    const {id} = useAppSelector(state=>state.tenderDetailsId)
     const dispatch = useAppDispatch()
 
     useEffect(()=>{
-        dispatch(getTender(id))
-    },[])
+        if(id) dispatch(getTender(id))
+    },[id])
 
     return{
         data,

@@ -11,7 +11,6 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
     return (
       <div className="w-full h-full bg-cream flex justify-center overflow-auto">
         <div className="max-w-[1200px] lg:max-w-[1400px] w-full py-[70px]">
-          <PopoverDialog content={<></>} hasCloseButton={false} />
           {children}
         </div>
         <NavBar />

@@ -1,11 +1,55 @@
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks"
 import useTenderDetails from "./use-tender-details"
+import TenderDetailsHeader from "./tender-details-header"
+import TenderDetailsTitle from "./tender-details-title"
+import TenderDetailsStatistics from "./tender-details-statistics"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import TenderDetailsDatesSection from "./tender-details-dates-section"
+import TenderDetailsCompetionSection from "./tender-details-competion-section"
 
-interface Props{
-    id:string
-}
 
-export default function TenderDetails({id}:Props){
-    const {data,isLoading,error} = useTenderDetails({id})
-    
+export default function TenderDetails(){
+    const {data,isLoading,error} = useTenderDetails()
+
+    console.log("creeee")
+
+    return(
+        data ? 
+        <div className="tender-details">
+            <TenderDetailsHeader tender={data} />
+            <div className="tender-details-contentt">
+
+                <TenderDetailsTitle tender={data}/>
+                <TenderDetailsStatistics tender={data}/>
+                <Accordion className="tender-details-accordion lg:w-[1200px]" type="multiple" defaultValue={["dates","competionDetails","classification"]}>
+                    <AccordionItem value="dates">
+                        <AccordionTrigger >
+                             المواعيد و التواريخ        
+                        </AccordionTrigger>
+                        <AccordionContent>
+                            <TenderDetailsDatesSection tender={data} />
+                        </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="competionDetails">
+                        <AccordionTrigger >
+                            تفاصيل المنافسة
+                        </AccordionTrigger>
+                        <AccordionContent>
+                            <TenderDetailsCompetionSection tender={data} />
+                        </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="classification">
+                        <AccordionTrigger>
+                            التصنيف و مجال التنفيذ
+                        </AccordionTrigger>
+                        <AccordionContent>
+                            <TenderDetailsDatesSection tender={data} />
+                        </AccordionContent>
+                    </AccordionItem>
+                </Accordion>
+            </div>
+        </div> 
+        : 
+        <div>tender details not available</div>
+    )
 }

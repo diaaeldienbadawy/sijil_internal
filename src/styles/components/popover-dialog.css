@@ -8,11 +8,14 @@
     top: 0;
     right: 0;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .popover-dialog .dialog-card{
     min-width: 250px;
     width: auto;
     min-height: 250px;
+    max-height: 90%;
     height: auto;
     margin: auto;
     background: var(--color-cream);

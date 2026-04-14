@@ -1,4 +1,9 @@
+
 import { TenderMin } from "@/lib/models/tender-min"
+import CardTitle from "./card-title"
+import CardHeader from "./card-header"
+import CardDescription from "./card-description"
+import CardFooter from "./card-footer"
 
 interface Props{
     tender: TenderMin
@@ -6,6 +11,13 @@ interface Props{
 
 export default function TenderCard({tender}:Props){
     return(
-        <div>{tender.agency_name}</div>
+        <div className="py-2">
+            <div className="tender-card">
+                <CardHeader tender={tender}/>
+                <CardTitle tender={tender}/>
+                <CardDescription tender={tender}/>
+                <CardFooter tender={tender}/>
+            </div>
+        </div>
     )
 }

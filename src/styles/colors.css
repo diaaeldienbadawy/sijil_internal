@@ -16,6 +16,22 @@
     --color-success: #009900;
     --tw-ring-color: #990707;
     --shadow-color:#d4cfc5;
+
+    --color-primary-code: 26 71 42;
+    --color-primary-light-code: 45 90 61;
+    --color-primary-dark-code: 15 40 23;
+    --color-gold-code: 201 162 39;
+    --color-gold-light-code: 230 197 86;
+    --color-cream-code: 248 245 240;
+    --color-paper-code: 255 254 249;
+    --color-text-dark-code: 26 26 26;
+    --color-text-muted-code: 90 90 90;
+    --color-border-code: 212 207 197;
+    --color-error-code: 192 57 43;
+    --color-alert-code: 238 238 17;
+    --color-success-code: 0 153 0;
+    --tw-ring-color-code: 153 7 7;
+    --shadow-color-code: 212 207 197;
 }
 
 /*

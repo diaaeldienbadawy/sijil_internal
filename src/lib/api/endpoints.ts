@@ -24,9 +24,11 @@ const withQuery = (path: string, params?: Record<string, string | number | boole
 
 export const API_ENDPOINTS = {
     AUTH:{
-        LOGIN : buildBase('/auth/token')
+        LOGIN : buildBase('/auth/token'),
+        REFRESH: buildBase('/auth/refresh')
     },
     TENDER:{
+      TENDER:(id:string)=>buildBase(`/tenders/${id}`),
       LIST:(params?:TenderListParams[]) => withQuery('/tenders',params as Record<string, string | number | boolean | undefined> | undefined)
     }
 }

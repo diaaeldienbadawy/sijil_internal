@@ -1,0 +1,72 @@
+.tender-card{
+    background: var(--color-paper);
+    background: radial-gradient(circle at top right, var(--color-paper) 0%,white 20%,white 100%);
+    border-radius: 10px;
+    box-shadow: rgb(200, 200, 200) 0px 0px 3px 0.05px ;
+    transition: all ease-in-out 300ms;
+    font-family: var(--tajawal-font-family);
+    overflow: hidden;
+    cursor: pointer;
+}
+.tender-card:hover{
+    scale: 1.01;
+}
+
+.tender-card-header{
+    color: var(--color-paper);
+    padding: 10px;   
+    border-bottom: 1px var(--color-border) solid ;
+    font-family: var(--amiri-font-family);
+    font-weight : normal;
+    background: radial-gradient(circle at top right, var(--color-gold) 0%,var(--color-primary-light) 50%, var(--color-primary-light)100%);
+    background-position-x:left;
+    background-size: 500%;
+    transition: all ease-in-out 700ms;
+    font-size: medium;
+}
+
+.tender-card:hover .tender-card-header{
+    color: var(--color-cream);
+    background-position-x:right;
+}
+
+.tender-card-title{
+    padding: 10px;
+}
+
+.tender-card-title .title{
+    color: var(--color-primary);
+    font-size: larger;
+    font-weight: bold;
+}
+
+.tender-card-title .agency{
+    color: var(--color-gold);
+    display: flex;
+    padding : 5px 0px
+}
+
+.tender-card-description{
+    padding: 10px;
+}
+
+.tender-card-footer{
+    padding: 10px;
+    color: var(--color-text-muted);
+}
+
+.tender-card-footer .e3tmad-link{
+    background:  radial-gradient(circle at top right, white -100%,var(--color-gold) 50%, var(--color-gold) 100%);
+    background-size: 200% ;
+    background-position: left;
+    padding: 5px 30px;
+    border-radius: 15px;
+
+    color: var(--color-cream);
+    transition: all ease-in-out 300ms;
+}
+
+.e3tmad-link:hover{
+    background-position: right;
+    color: var(--color-paper);
+}

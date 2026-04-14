@@ -1,0 +1,1 @@
+export interface ExecutionRegion { name: string; cities: string[]; }

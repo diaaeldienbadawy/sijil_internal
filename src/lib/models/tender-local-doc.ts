@@ -1,0 +1,1 @@
+export interface TenderLocalDoc { tender_id: string; title: string; url: string; }

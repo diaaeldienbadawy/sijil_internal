@@ -12,6 +12,9 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
 
     return(
         <html lang="ar" dir="rtl">
+            <head>
+                <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Aref+Ruqaa:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet"/>
+            </head>
             <body>
                 <Suspense fallback={<MutatingDots/>}>
                     <StoreProvider>

@@ -15,4 +15,8 @@
     .custom-nav-bar:hover .nav-page-name {
         max-width: 200px; /* أو قيمة مناسبة */
     }
+    
 }
+
+@import './tender-card.css';
+@import './components/popover-dialog.css';

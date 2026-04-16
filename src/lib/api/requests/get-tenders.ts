@@ -7,7 +7,7 @@ import { TenderListResponse } from "../responses/tenders-list-response";
 
 export const getTenders = createAsyncThunk(
     'tenders',
-    async(params:TenderListParams[])=>{
+    async(params:TenderListParams)=>{
         return FetchHelper.get<TenderListResponse>(API_ENDPOINTS.TENDER.LIST(params),{needAuthorization:true})
     }
 )

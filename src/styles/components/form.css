@@ -1,0 +1,15 @@
+.input-field{
+    background: var(--color-paper);
+    color: var(--color-primary);
+    border-radius: 5px !important;
+    padding: 8px 16px !important;
+    display: flex;
+    gap: 2px;
+    /* box-shadow: var(--color-primary ) 0px 0px 2px 0.1px; */
+    font-size: larger ;
+        border: rgba(50,50,50,0.05) 1px solid !important;
+        border-bottom: 2px solid var(--color-gold) !important;
+}
+.input-field:focus{
+    outline: var(--color-gold-light) 1px solid;
+}

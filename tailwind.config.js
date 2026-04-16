@@ -20,6 +20,20 @@ module.exports = {
         success: "var(--color-success)",
         ring:"var(--color-border)"
       },
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.3s ease-out",
+        "accordion-up": "accordion-up 0.3s ease-out",
+      },
     },
     fontFamily:{
       tajawal:"var(--tajawal-font-family)",
@@ -49,4 +63,5 @@ module.exports = {
 
       addUtilities(newUtilities, { variants: ["responsive", "hover", "active"] });
     },],
+    
 };

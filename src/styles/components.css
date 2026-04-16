@@ -1,23 +1,15 @@
 @tailwind components;
 
 @layer component{
-    .custom-nav-bar{
-        cursor: pointer;
-    }
 
-    .custom-nav-bar .nav-page-name {
-        max-width: 0;
-        overflow: hidden;
-        white-space: nowrap;
-        transition: max-width 0.3s ease-in-out;
-    }
-    
-    .custom-nav-bar:hover .nav-page-name {
-        max-width: 200px; /* أو قيمة مناسبة */
-    }
     
 }
 
+@import './components/form.css';
+@import './components/navbar.css';
+@import './components/pagination.css';
 @import './components/tender-card.css';
 @import './components/tender-details.css';
 @import './components/popover-dialog.css';
+
+@import './components/tenders-filter.css';

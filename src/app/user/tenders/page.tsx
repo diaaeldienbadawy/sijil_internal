@@ -9,7 +9,7 @@ import TendersFilter from "@/components/tenders/tenders-pager-filter/tenders-fil
 export default function TendersPage(){
 
     return(
-        <div className="">
+        <div className="h-[100%] flex flex-col">
             <PopoverDialog content={<TenderDetails/>} hasCloseButton={false} />
             <TendersPageHeader/>
             <TendersFilter/>

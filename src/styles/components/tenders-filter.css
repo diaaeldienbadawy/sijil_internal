@@ -1,0 +1,90 @@
+.tenders-filter-card{
+    /* background: var(--color-cream); */
+    border-radius: 10px;
+    padding: 10px 5px;
+    /* box-shadow: rgba(50,50,50,0.2) 0px 0px 5px 0.2px; */
+    /* background: var(--color-paper); */
+}
+
+.tenders-search-field{
+    background: var(--color-paper);
+    color: var(--color-primary);
+    border-radius: 5px !important;
+    padding: 0px 16px !important;
+    display: flex;
+    gap: 2px;
+    font-size: larger ;
+    border: rgba(50,50,50,0.05) 1px solid;
+    border-bottom: 2px solid var(--color-gold);
+    /* border: rgba(50,50,50,0.2) 2px solid; */
+}
+.tenders-search-text-field{
+    background: var(--color-paper);
+    color: var(--color-primary);
+    border-radius: 10px;
+    padding: 22px 16px !important;
+    display: flex;
+    gap: 2px;
+    font-size: medium !important;
+    border: rgba(50,50,50,0.2) 2px solid;
+}
+.search-mode{
+    display: flex;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    padding: 5px 16px ;
+    font-size: medium;
+    text-align: center;
+    justify-items: center;
+    justify-content: center;
+}
+.selected-search-mode{
+    /* border-bottom: 2px solid var(--color-gold); */
+    padding: 5px 16px;
+    font-size: medium;
+    color: var(--color-primary);
+    background: rgb(var(--color-gold-code)/0.2);
+    border-radius: 5px;
+}
+
+.add-filter-select{
+    height: 100%;
+    color: var(--color-primary);
+    padding: 10px 16px !important;
+    display: flex;
+    gap: 2px;
+    border-radius: 5px;
+    font-size: medium ;
+    background: var(--color-paper);
+    border: rgba(50,50,50,0.05) 1px solid;
+    border-bottom: 2px solid var(--color-gold);
+    cursor: pointer;
+}
+.add-filter-select-content{
+    background: var(--color-paper);
+    border-radius: 5px;
+    box-shadow: rgba(50,50,50,0.2) 0px 0px 5px 0.2px;
+    border: 0px solid transparent;
+    padding: 10px 16px !important;
+    display: flex;
+    gap: 2px;
+    row-gap: 20px;
+    font-size: medium ;
+    max-height: 300px;
+    overflow-y: auto;
+    border: none !important;
+}
+.add-filter-select-group{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.add-filter-select-content th,td{
+    padding: 5px;
+    font-size: medium;
+}
+
+.add-filter-select-content td button[aria-label*="selected"]{
+    color: aliceblue !important;
+}

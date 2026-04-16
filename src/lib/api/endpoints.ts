@@ -29,6 +29,6 @@ export const API_ENDPOINTS = {
     },
     TENDER:{
       TENDER:(id:string)=>buildBase(`/tenders/${id}`),
-      LIST:(params?:TenderListParams[]) => withQuery('/tenders',params as Record<string, string | number | boolean | undefined> | undefined)
+      LIST:(params?:TenderListParams) => withQuery('/tenders',params as Record<string, string | number | boolean | undefined> | undefined)
     }
 }

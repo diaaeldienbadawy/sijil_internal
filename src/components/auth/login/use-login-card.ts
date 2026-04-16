@@ -32,7 +32,7 @@ export default function useLoginCard(){
             if(data.access_token) {
                 console.log("accessToken is", data.access_token)
                 await cookieStore.set('access_token', data.access_token)
-                router.push('http://localhost:3000/tenders')
+                router.push('http://localhost:3000/user/tenders')
                 //NextResponse.redirect('/tenders')
             }
         }

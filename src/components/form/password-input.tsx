@@ -6,7 +6,7 @@ interface Props{
     className?: string
     id?:string
     value?:string
-    setValue?:Dispatch<SetStateAction<string|undefined>>
+    setValue?:(v:string|undefined) => void;
     placeholder?:string
     showPassword?:boolean
 }

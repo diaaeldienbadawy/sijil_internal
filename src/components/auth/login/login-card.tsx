@@ -37,9 +37,9 @@ export default function LoginCard(){
                         <div className="text-red-500 py-2 font-tajawal text-center">
                             <h5>{error}</h5>
                         </div>
-                        <LabeledInput lable="اسم المستخدم" placeholder="ادخل اسم المستخدم" value={username} setValue={setUserName} />
-                        <LabeledInput lable="كلمة السر" placeholder="ادخل كلمة السر" type="password" value={password} setValue={setPassword} />
-                        {/* <LabeledInput dir="horizontal" lable="تذكرني" type="checkbox" checked={remember} setChecked={setRemember} /> */}
+                        <LabeledInput label="اسم المستخدم" placeholder="ادخل اسم المستخدم" value={username} setValue={setUserName} />
+                        <LabeledInput label="كلمة السر" placeholder="ادخل كلمة السر" type="password" value={password} setValue={setPassword} />
+                        {/* <LabeledInput dir="horizontal" label="تذكرني" type="checkbox" checked={remember} setChecked={setRemember} /> */}
                         <div className="py-6">
                             <FormButton isSubmit={true} varient="default" size="xxxl" className="text-paper text-xl rounded-xl" text="تسجيل دخول" isLoading={isLoading} />
                         </div>

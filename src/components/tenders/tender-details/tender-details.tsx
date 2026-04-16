@@ -6,14 +6,16 @@ import TenderDetailsStatistics from "./tender-details-statistics"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import TenderDetailsDatesSection from "./tender-details-dates-section"
 import TenderDetailsCompetionSection from "./tender-details-competion-section"
+import TenderDetailsClassificationSection from "./tender-details-classification-section"
+import TenderDetailsLocalContentSection from "./tender-details-local-content"
+import MutatingDots from "@/components/utility/spinners/mutating-dots"
 
 
 export default function TenderDetails(){
     const {data,isLoading,error} = useTenderDetails()
 
-    console.log("creeee")
-
     return(
+        isLoading?<MutatingDots />  :
         data ? 
         <div className="tender-details">
             <TenderDetailsHeader tender={data} />
@@ -43,7 +45,15 @@ export default function TenderDetails(){
                             التصنيف و مجال التنفيذ
                         </AccordionTrigger>
                         <AccordionContent>
-                            <TenderDetailsDatesSection tender={data} />
+                            <TenderDetailsClassificationSection tender={data} />
+                        </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="classification">
+                        <AccordionTrigger>
+                            المحتوى المحلى
+                        </AccordionTrigger>
+                        <AccordionContent>
+                            <TenderDetailsLocalContentSection tender={data} />
                         </AccordionContent>
                     </AccordionItem>
                 </Accordion>

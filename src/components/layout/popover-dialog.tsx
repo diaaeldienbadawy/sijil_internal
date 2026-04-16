@@ -1,3 +1,6 @@
+import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
+import { closePopoverDialog } from "@/lib/redux/slices/state_slices/popover-dialog-slice";
+import { is } from "date-fns/locale";
 import { ReactNode } from "react";
 
 interface Props{
@@ -5,10 +8,17 @@ interface Props{
     hasCloseButton:boolean
 }
 
-export default function PopoverDialog({content,hasCloseButton}:Props){
+export default function PopoverDialog({content}:Props){
+    const state = useAppSelector(s=>s.popoverDialogOpen)
+    const dispatch = useAppDispatch()
+
+
+    const onClose = () => dispatch(closePopoverDialog()) 
+
     return(
-        <div className="popover-dialog">
-            <div className="dialog-card">
+        state.isOpen &&
+        <div className="popover-dialog" onClick={onClose}>
+            <div className="dialog-card" onClick={(e) => e.stopPropagation()}>
                 {content}
             </div>
         </div>

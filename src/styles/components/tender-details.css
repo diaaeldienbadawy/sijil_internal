@@ -53,10 +53,12 @@
 
 .tender-details-statistics .statistic{
     padding: 10px;
-    background: radial-gradient(circle at top right, var(--color-paper) -50%,rgb(var(--color-gold-code)/0.05) 50%,rgb(var(--color-gold-code)/0.05) 100%);
+    background: radial-gradient(circle at top right, var(--color-paper) -50%,rgb(var(--color-cream-code)) 50%,rgb(var(--color-cream-code)) 100%);
     border-radius: 10px;
     color: var(--color-primary);
-    box-shadow: rgb(var(--color-primary-light-code)/0.1) 0px 0px 2px 1px ;
+    /* border : black 1px solid; */
+    /* box-shadow: rgb(var(--color-primary-light-code)/0.1) 0px 0px 2px 1px ; */
+    box-shadow: rgb(var(--color-primary-light-code)) 0px 0px 0px 1px ; 
 }
 
 .tender-details-accordion{

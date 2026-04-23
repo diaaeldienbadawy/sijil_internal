@@ -14,7 +14,7 @@ export default function JudgesCard({data}:{data:JudgeSearchResult}){
 
     return(
         <div className="py-4">
-            <div className="tender-card" onClick={onCardClick}>
+            <div className="card" onClick={onCardClick}>
                 <JudgeCardHeader judge={data.initial_judgment}/>
                 <JudgeCardDescription judge={data.initial_judgment}/>
                 <JudgeCardFooter judge={data}/>

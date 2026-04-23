@@ -10,7 +10,7 @@ export default function JudgeCardFooter({judge}:{judge:JudgeSearchResult}){
 
 
     return(        
-        <div className="flex md:justify-between justify-start flex-wrap tender-card-footer">
+        <div className="flex md:justify-between justify-start flex-wrap card-footer">
             <div className="flex flex-wrap gap-x-4">
                 <div className="flex my-auto p-2 gap-x-1">
                     {judge.has_appeal ? `تاريخ الاستأناف ${judge.appeal_date}` : ''}

@@ -6,7 +6,7 @@ interface Props {
 
 export default function CardDescription({tender}:Props){
     return(
-        <div className="tender-card-description">
+        <div className="card-description">
             {tender.purpose}
         </div>
     )

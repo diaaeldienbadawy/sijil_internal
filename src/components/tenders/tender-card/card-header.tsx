@@ -7,7 +7,7 @@ interface Props {
 
 export default function CardHeader({tender}:Props){
     return(
-        <div className="flex justify-between tender-card-header">
+        <div className="flex justify-between card-header">
             <div className="flex">
                 <div>
                     {tender.tender_type}

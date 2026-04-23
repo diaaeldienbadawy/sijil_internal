@@ -1,13 +1,89 @@
-.tender-card{
+.card{
+    position: relative;
     background: var(--color-paper);
     background: radial-gradient(circle at top right, var(--color-paper) 0%,white 20%,white 100%);
     border-radius: 10px;
+    padding: 0px 10px;
     box-shadow: rgb(200, 200, 200) 0px 0px 3px 0.05px ;
     transition: all ease-in-out 300ms;
     font-family: var(--tajawal-font-family);
     overflow: hidden;
     cursor: pointer;
 }
-.tender-card:hover{
-    scale: 1.01;
+.card:hover {
+    transform: translateX(-5px);
+}
+
+.card::after {
+    position:absolute;
+    content: '';
+    top: 0;
+    bottom: 0;
+    right: -5px;
+    width: 5px;
+    background: var(--color-gold);
+    transition: all ease-in-out 0.3s;
+}
+.card:hover::after{
+    right: 0;
+}
+
+.card-header{
+    /* color: var(--color-paper);
+    padding: 10px;   
+    border-bottom: 1px var(--color-border) solid ;
+    font-family: var(--amiri-font-family);
+    font-weight : normal;
+    background-color: var(--color-primary-light);
+    background-position-x:left;
+    background-size: 100%;
+    transition: all ease-in-out 700ms;
+    font-size: medium; */
+    padding: 10px;
+    font-family: var(--amiri-font-family);
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+/* .card:hover .card-header{
+    color: var(--color-cream);
+    background-color: var(--color-gold);
+} */
+
+.card-title{
+    padding: 10px;
+}
+
+.card-title .title{
+    color: var(--color-primary);
+    font-size: larger;
+    font-weight: bold;
+}
+
+.card-title .agency{
+    color: var(--color-gold);
+    display: flex;
+    padding : 5px 0px
+}
+
+.card-description{
+    padding: 20px 10px;
+}
+
+.card-footer{
+    padding: 10px;
+    color: var(--color-text-muted);
+}
+
+.card-footer .e3tmad-link{
+    /* background:  radial-gradient(circle at top right, white -100%,var(--color-gold) 50%, var(--color-gold) 100%); */
+    border-radius: 15px;
+    text-decoration: underline;
+    color: var(--color-gold);
+    transition: all ease-in-out 300ms;
+}
+
+.e3tmad-link:hover{
+    color: var(--color-primary);
 }

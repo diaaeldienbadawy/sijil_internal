@@ -23,7 +23,7 @@ export default function TenderCard({tender}:Props){
 
     return(
         <div className="py-4">
-            <div className="tender-card" onClick={onCardClick}>
+            <div className="card" onClick={onCardClick}>
                 <CardHeader tender={tender}/>
                 <CardTitle tender={tender}/>
                 <CardDescription tender={tender}/>

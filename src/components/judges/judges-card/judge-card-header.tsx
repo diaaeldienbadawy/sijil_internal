@@ -2,7 +2,7 @@ import { JudgmentSummary } from "@/lib/models/judges/judgment-summary";
 
 export default function JudgeCardHeader({judge}:{judge:JudgmentSummary}){
     return(        
-        <div className="flex justify-between tender-card-header">
+        <div className="flex justify-between card-header">
             <div className="flex">
                 <div>
                     {judge.court_name}

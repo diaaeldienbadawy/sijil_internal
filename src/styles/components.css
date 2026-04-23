@@ -8,6 +8,7 @@
 @import './components/form.css';
 @import './components/navbar.css';
 @import './components/pagination.css';
+@import './components/card.css';
 @import './components/tender-card.css';
 @import './components/tender-details.css';
 @import './components/popover-dialog.css';

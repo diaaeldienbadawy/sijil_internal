@@ -68,6 +68,8 @@ export const tenderFilterContentSlice = createSlice(
                 else return {...state,tender_number:{...state.tender_number,available:false, value:undefined}}
             },
             setCompetitionStatus:(state,action)=>{
+
+                console.log("actionee ", action.payload)
                 const value = action.payload as string|undefined
                 return {...state,competition_status:{...state.competition_status, value:value}}
             },

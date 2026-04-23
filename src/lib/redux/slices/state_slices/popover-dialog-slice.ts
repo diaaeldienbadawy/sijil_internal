@@ -9,10 +9,12 @@ export const popoverDialog = createSlice({
         open:(state, action)=>{
             state.isOpen = true
             state.content = action.payload
+            return state
         },
         close:(state)=>{
             state.isOpen = false
             state.content = undefined
+            return state
         }
     }
 })

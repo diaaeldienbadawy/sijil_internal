@@ -3,23 +3,20 @@ import { closePopoverDialog } from "@/lib/redux/slices/state_slices/popover-dial
 import { is } from "date-fns/locale";
 import { ReactNode } from "react";
 
-interface Props{
-    content:ReactNode
-    hasCloseButton:boolean
-}
 
-export default function PopoverDialog({content}:Props){
+export default function PopoverDialog(){
     const state = useAppSelector(s=>s.popoverDialogOpen)
     const dispatch = useAppDispatch()
 
 
-    const onClose = () => dispatch(closePopoverDialog()) 
+    const onClose = () => dispatch(closePopoverDialog())
+
 
     return(
         state.isOpen &&
-        <div className="popover-dialog" onClick={onClose}>
+        <div className="popover-dialog flex flex-col justify-center w-[100%] " onClick={onClose}>
             <div className="dialog-card" onClick={(e) => e.stopPropagation()}>
-                {content}
+                {state.content}
             </div>
         </div>
     )

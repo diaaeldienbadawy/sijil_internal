@@ -5,4 +5,4 @@ export interface ApiActionState<T> {
     error?: string;
 }
 
-export function getInitialApiState<T> (): ApiActionState<T> { return ({ data : undefined, isLoading : false, error : undefined }) }
+export function getInitialApiState<T> (data?:T): ApiActionState<T> { return ({ data : data, isLoading : false, error : undefined }) }

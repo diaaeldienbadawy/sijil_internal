@@ -21,7 +21,7 @@ export default function CustomPagination({ totalPages }:Props){
     return(
       <div className="p-5">
         <Pagination>
-          <PaginationContent>
+          <PaginationContent className="flex flex-wrap">
             <PaginationItem  className="pagination-link previous" aria-disabled={currentPage === 1} onClick={()=>onPageChange(Math.max(1, currentPage - 1))} >
                 السابق
             </PaginationItem>

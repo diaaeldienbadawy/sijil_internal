@@ -1,42 +1,63 @@
 "use client";
-import { Backpack, BanknoteIcon, CheckIcon, List, ListCheck, LogOut, LucideBanknote, LucideBanknoteX, LucideLogOut, LucidePaperclip, Paperclip, PartyPopper } from "lucide-react";
+
+import { motion } from "framer-motion";
+import { ListCheck, Paperclip, LucideLogOut } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 
-export default function NavBar(){
-    const router = useRouter()
-    const pathname = usePathname()
+export default function NavBar() {
+  const router = useRouter();
+  const pathname = usePathname();
 
-    const onTabClick = (path:string) => {
-        router.push(path)
-    }
+  const tabs = [
+    { path: "/user/tenders", label: "المناقصات", icon: ListCheck },
+    { path: "/user/judges", label: "الاحكام", icon: Paperclip },
+  ];
 
-    const onLogout = async () => { 
-        await cookieStore.delete('access_token')
-        router.push('/login')
-    }
+  return (
+    <div className="navbar-container">
+      <div className="navbar">
+        {tabs.map((tab) => {
+          const isActive = pathname === tab.path;
+          const Icon = tab.icon;
 
-    // const activeTabStyle = "p-2 px-3 bg-gold-light text-primary border-cream border border-2 rounded-2xl flex"
-    // const inactiveTabStyle = "p-2 px-3 bg-cream-light rounded-lg flex"
+          return (
+            <div
+              key={tab.path}
+              onClick={() => router.push(tab.path)}
+              className="relative flex items-center px-3 py-2 cursor-pointer"
+            >
+              {isActive && (
+                <motion.div
+                  layoutId="active-pill"
+                  className="absolute inset-0 bg-gold-light border-2 border-cream rounded-full"
+                  transition={{
+                    type: "spring",
+                    stiffness: 500,
+                    damping: 30,
+                  }}
+                />
+              )}
 
-    return(
-        <div className="navbar-container">
-            <div className="navbar">
-                <div className={pathname === '/user/tenders' ? 'active-tab' : 'inactive-tab'} onClick={()=>onTabClick('/user/tenders')}>
-                    <ListCheck className="m-auto"/>
-                    <div className="nav-page-name">المناقصات</div>
-                </div>
-                <div className={pathname === '/user/cases' ? 'active-tab' : 'inactive-tab'} onClick={()=>onTabClick('/user/cases')}>
-                    <Paperclip className="m-auto"/>
-                    <div className="nav-page-name">الاحكام</div>
-                </div>
-                <div className="w-[20px] p-2">
-                    <div className="border-1 border border-gold-light h-[100%] w-[1px]"></div>
-                </div>
-                <div className="p-2 px-3 bg-cream-light rounded-lg flex"  onClick={()=>onLogout()}>
-                    <LucideLogOut className="rotate-180 m-auto"/>
-                    <div className="nav-page-name">تسجيل خروج</div>
-                </div>
+              <Icon className="relative z-10 m-auto" />
+              <div className="nav-page-name relative z-10">
+                {tab.label}
+              </div>
             </div>
+          );
+        })}
+
+        {/* divider */}
+        <div className="w-[1px] bg-gold-light mx-2" />
+
+        {/* logout */}
+        <div
+          onClick={() => router.push("/login")}
+          className="flex items-center px-3 py-2 rounded-full bg-cream-light"
+        >
+          <LucideLogOut className="rotate-180 m-auto" />
+          <div className="nav-page-name">تسجيل خروج</div>
         </div>
-    )
+      </div>
+    </div>
+  );
 }

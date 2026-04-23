@@ -8,8 +8,6 @@
     overflow: hidden;
     cursor: pointer;
     height: 100%;
-    display: flex;
-    flex-direction: column;
 }
 
 .tender-details-header{

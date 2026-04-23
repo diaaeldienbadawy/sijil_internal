@@ -1,4 +1,4 @@
-import { TenderMin } from "@/lib/models/tender-min"
+import { TenderMin } from "@/lib/models/tenders/tender-min"
 
 interface Props {
     tender : TenderMin

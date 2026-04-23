@@ -1,6 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks"
 import { changeTenderDetailsId } from "@/lib/redux/slices/state_slices/tender-details-id"
-import { da } from "date-fns/locale"
 import { useEffect, useState } from "react"
 
 export default function useTendersList(){

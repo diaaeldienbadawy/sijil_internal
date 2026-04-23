@@ -1,4 +1,4 @@
-import { Tender } from "@/lib/models/tender";
+import { Tender } from "@/lib/models/tenders/tender";
 import { CalendarRangeIcon } from "lucide-react";
 
 interface Props{

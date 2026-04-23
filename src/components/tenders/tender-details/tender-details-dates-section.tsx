@@ -1,5 +1,5 @@
 import { DateTimeHelper } from "@/lib/helpers/date-time-helper";
-import { Tender } from "@/lib/models/tender";
+import { Tender } from "@/lib/models/tenders/tender";
 import dayjs from 'dayjs';
 
 interface Props{

@@ -1,5 +1,5 @@
-import { PageMeta } from "@/lib/models/page-meta";
-import { TenderMin } from "@/lib/models/tender-min";
+import { PageMeta } from "@/lib/models/tenders/page-meta";
+import { TenderMin } from "@/lib/models/tenders/tender-min";
 
 export interface TenderListResponse {
   items: TenderMin[];

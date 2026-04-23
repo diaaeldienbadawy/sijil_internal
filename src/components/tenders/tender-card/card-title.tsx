@@ -1,4 +1,4 @@
-import { TenderMin } from "@/lib/models/tender-min"
+import { TenderMin } from "@/lib/models/tenders/tender-min"
 import { AlignCenterIcon, Building } from "lucide-react"
 
 interface Props {

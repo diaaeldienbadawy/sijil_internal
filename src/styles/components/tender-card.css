@@ -58,7 +58,6 @@
 
 .tender-card-footer .e3tmad-link{
     /* background:  radial-gradient(circle at top right, white -100%,var(--color-gold) 50%, var(--color-gold) 100%); */
-    padding: 5px 30px;
     border-radius: 15px;
     text-decoration: underline;
     color: var(--color-gold);

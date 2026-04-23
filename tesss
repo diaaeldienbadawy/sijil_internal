@@ -1,0 +1,2 @@
+PS E:\dev\react\judges\legal-search-v9> .\venv\Scripts\activate
+(venv) PS E:\dev\react\judges\legal-search-v9> python .\server.py

@@ -1,4 +1,4 @@
-import { Tender } from "@/lib/models/tender";
+import { Tender } from "@/lib/models/tenders/tender";
 
 interface Props{
     tender:Tender

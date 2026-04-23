@@ -1,0 +1,13 @@
+.tender-card{
+    background: var(--color-paper);
+    background: radial-gradient(circle at top right, var(--color-paper) 0%,white 20%,white 100%);
+    border-radius: 10px;
+    box-shadow: rgb(200, 200, 200) 0px 0px 3px 0.05px ;
+    transition: all ease-in-out 300ms;
+    font-family: var(--tajawal-font-family);
+    overflow: hidden;
+    cursor: pointer;
+}
+.tender-card:hover{
+    scale: 1.01;
+}

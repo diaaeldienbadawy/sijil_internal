@@ -9,6 +9,7 @@ import {
   InputGroupInput,
   InputGroupText,
 } from "@/components/ui/input-group"
+import { TenderSearchMode } from "@/lib/api/params/tender-search-mode"
 
 interface Props{
     className?: string
@@ -16,8 +17,8 @@ interface Props{
     value?:string
     setValue?:Dispatch<SetStateAction<string|undefined>>
     placeholder?:string
-    searchMode?: "automatic" | "phrases" | "segments"
-    setSearchMode?:(mode:"automatic" | "phrases" | "segments")=>void
+    searchMode?: TenderSearchMode
+    setSearchMode?:(mode:TenderSearchMode)=>void
 }
 
 export default function SearchInput({className,id,value,setValue,placeholder,searchMode,setSearchMode}:Props){
@@ -32,7 +33,7 @@ export default function SearchInput({className,id,value,setValue,placeholder,sea
     },[])
 
     return(
-          <InputGroup className={` ${className}`}>
+          <InputGroup className={` ${className} flex flex-wrap md:flex-nowrap`}>
              <InputGroupAddon  align="inline-start">
               <Search /> 
             </InputGroupAddon>
@@ -43,28 +44,28 @@ export default function SearchInput({className,id,value,setValue,placeholder,sea
                 onChange={e=>setValue?.(e.target.value)} 
                 placeholder={placeholder}
             />
-            <InputGroupAddon  align="inline-end">
+            <InputGroupAddon className="py-2 md:py-0" align="inline-end">
               <div className="flex gap-2 px-2">
                 <div className="flex justify-center items-center">
                     <div 
-                        className= {`search-mode ${searchMode === "automatic" ? "selected-search-mode" : ""}`}
-                        onClick={()=>setSearchMode?.("automatic")}    
+                        className= {`search-mode ${searchMode === "smart" ? "selected-search-mode" : ""}`}
+                        onClick={()=>setSearchMode?.("smart")}    
                         >
                         تلقائي
                     </div>
                 </div>
                 <div className="flex justify-center items-center">
                     <div 
-                        className= {`search-mode ${searchMode === "phrases" ? "selected-search-mode" : ""}`}
-                        onClick={()=>setSearchMode?.("phrases")}    
+                        className= {`search-mode ${searchMode === "phrase" ? "selected-search-mode" : ""}`}
+                        onClick={()=>setSearchMode?.("phrase")}    
                         >
                         عبارات
                     </div>
                 </div>
                 <div className="flex justify-center items-center">
                     <div 
-                        className= {`search-mode ${searchMode === "segments" ? "selected-search-mode" : ""}`}
-                        onClick={()=>setSearchMode?.("segments")}    
+                        className= {`search-mode ${searchMode === "tokens" ? "selected-search-mode" : ""}`}
+                        onClick={()=>setSearchMode?.("tokens")}    
                         >
                         مقاطع
                     </div>

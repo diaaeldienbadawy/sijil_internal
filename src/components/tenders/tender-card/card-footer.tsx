@@ -1,5 +1,5 @@
-import { TenderMin } from "@/lib/models/tender-min"
-import { BadgeIcon, Clock, DollarSign, ExternalLink, TagIcon } from "lucide-react"
+import { TenderMin } from "@/lib/models/tenders/tender-min"
+import { BadgeIcon, Clock, DollarSign, ExternalLink, SaudiRiyal, TagIcon } from "lucide-react"
 import RiyalIcon from "../../../assets/icons/riyal.png";
 
 interface Props {
@@ -13,23 +13,24 @@ export default function CardFooter({tender}:Props){
     }
 
     return(
-        <div className="flex justify-between tender-card-footer">
-            <div className="flex gap-x-4">
-                <div className="flex m-auto gap-x-1">
+        <div className="flex md:justify-between justify-start flex-wrap tender-card-footer">
+            <div className="flex flex-wrap gap-x-4">
+                <div className="flex my-auto p-2 gap-x-1">
                     <TagIcon/>
                     {tender.reference_number}
                 </div>
-                <div className="flex m-auto gap-x-1">
-                    <img src={RiyalIcon.src} alt="Riyal" style={{width:25 , height:20, margin:'auto'}} className="w-4"/>
+                <div className="flex my-auto p-2 gap-x-1">
+                    {/* <img src={RiyalIcon.src} alt="Riyal" style={{width:25 , height:20, margin:'auto'}} className="w-4"/> */}
+                    <SaudiRiyal/>
                     {tender.documents_price_sar}
                 </div>
-                <div className="flex m-auto gap-x-1">
+                <div className="flex my-auto p-2 gap-x-1">
                     <Clock/>
                     {tender.remaining_time_text}
                 </div>
             </div>
-            <div>
-                <div className="flex m-auto gap-x-1 e3tmad-link" onClick={(e)=>onClickLink(e)}>
+            <div className="flex">
+                <div className="flex my-auto p-2 gap-x-1 e3tmad-link" onClick={(e)=>onClickLink(e)}>
                     <ExternalLink/>
                     اعتماد
                 </div>

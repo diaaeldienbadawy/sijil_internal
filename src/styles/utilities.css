@@ -17,14 +17,17 @@
     }
 
     .bg-gold-light{
-        background: radial-gradient(circle at top right, white -20%, var(--color-gold-light) 40%, var(--color-gold-light) 100%);
+        /*background: radial-gradient(circle at top right, white -20%, var(--color-gold-light) 40%, var(--color-gold-light) 100%);*/
+        background:  var(--color-gold-light)
     }
     .bg-gold{
-        background: radial-gradient(circle at top right, white -20%, var(--color-gold) 40%, var(--color-gold) 100%);
+        /* background: radial-gradient(circle at top right, white -20%, var(--color-gold) 40%, var(--color-gold) 100%); */
+        background: var(--color-gold);
     }
 
     .badge-primary{
-        background: radial-gradient(circle at top right, white -20%, var(--color-primary) 40%, var(--color-primary) 100%);
+        /* background: radial-gradient(circle at top right, white -20%, var(--color-primary) 40%, var(--color-primary) 100%); */
+        background:var(--color-primary);
         color: var(--color-paper);
         border: 1px solid var(--color-primary);
         display: inline-block;
@@ -32,21 +35,24 @@
         border-radius: 5px;
     }
     .badge-gold{
-        background: radial-gradient(circle at top right, white -100%, var(--color-gold) 40%, var(--color-gold) 100%);
+        /* background: radial-gradient(circle at top right, white -100%, var(--color-gold) 40%, var(--color-gold) 100%); */
+        background:var(--color-gold);
         color: var(--color-paper);
         display: inline-block;
         padding: 2px 8px;
         border-radius: 55px;
     }
     .badge-gold-light{
-        background: radial-gradient(circle at top right, white -100%, var(--color-gold-light) 40%, var(--color-gold-light) 100%);
+        /* background: radial-gradient(circle at top right, white -100%, var(--color-gold-light) 40%, var(--color-gold-light) 100%); */
+        background: var(--color-gold-light) ;
         color: var(--color-primary);
         display: inline-block;
         padding: 2px 8px;
         border-radius: 55px;
     }
     .badge-cream{
-        background: radial-gradient(circle at top right, white -100%, var(--color-gold-cream) 40%, var(--color-gold-cream) 100%);
+        /* background: radial-gradient(circle at top right, white -100%, var(--color-gold-cream) 40%, var(--color-gold-cream) 100%); */
+        background: var(--color-gold-cream);
         color: var(--color-primary);
         display: inline-block;
         padding: 2px 8px;

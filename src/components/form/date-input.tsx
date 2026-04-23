@@ -3,7 +3,7 @@ import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
 import { CalendarIcon } from "lucide-react"
 import { Calendar } from "../ui/calendar"
-import dayjs from "dayjs"
+import dayjs, { Dayjs } from "dayjs"
 
 interface Props{
     className?: string
@@ -17,26 +17,27 @@ export default function DateInput({className,id,value,setValue,placeholder}:Prop
     const ref = useRef<HTMLInputElement>(null)
     
     const [open, setOpen] = useState(false)
-    const [date, setDate] = useState<Date | undefined>(undefined)
-    const [month, setMonth] = useState<Date | undefined>(date)
+    const [date, setDate] = useState<Dayjs | undefined>(undefined)
+    const [month, setMonth] = useState<Dayjs | undefined>(date)
 
-    function formatDate(date: Date | undefined) {
-      if (!date) {
+    function formatDate(date: Dayjs | undefined) {
+      const d:Dayjs| undefined =date
+ 
+      console.log("date dses1",d)
+      if (!d) {
         return ""
       }
 
-      return date.toLocaleDateString("en-US", {
-        day: "2-digit",
-        month: "long",
-        year: "numeric",
-      })
+      console.log("date dses2", d.format("YYYY MMM DD"))
+
+      return d.format("YYYY MMM DD")
     }
 
-    function isValidDate(date: Date | undefined) {
+    function isValidDate(date: Dayjs | undefined) {
       if (!date) {
         return false
       }
-      return !isNaN(date.getTime())
+      return !isNaN(date.minute())
     }
 
 
@@ -53,7 +54,7 @@ export default function DateInput({className,id,value,setValue,placeholder}:Prop
 
     useEffect(()=>{
         console.log("value dses",value)
-        if(value) setDate(new Date(value))
+        if(value) setDate(dayjs(value))
     },[value])
 
     useEffect(()=>{
@@ -71,8 +72,8 @@ export default function DateInput({className,id,value,setValue,placeholder}:Prop
                 value={value}
                 placeholder="اخرت التاريخ"
                 onChange={(e) => {
-                  const date = new Date(e.target.value)
-                  setValue?.(e.target.value)
+                  const date = dayjs(e.target.value)
+                  setValue?.(formatDate(date))
                   if (isValidDate(date)) {
                     setDate(date)
                     setMonth(date)
@@ -100,14 +101,17 @@ export default function DateInput({className,id,value,setValue,placeholder}:Prop
                 >
                   <Calendar
                     mode="single"
-                    selected={date}
-                    month={month}
-                    onMonthChange={setMonth}
+                    selected={date?.toDate()}
+                    month={month?.toDate()}
+                    onMonthChange={e=>setMonth(dayjs(e))}
                     modifiersClassNames={{
                         today : "bg-transparent"
                     }}
                     onSelect={(date) => {
-                      setValue?.(formatDate(date))
+                      console.log("eesss",date)
+                      console.log("eesss",dayjs(date))
+                      console.log("eesss",formatDate(dayjs(date)))
+                      setValue?.(formatDate(dayjs(date)))
                       setOpen(false)
                     }}
                   />

@@ -1,4 +1,4 @@
-import { Tender } from "@/lib/models/tender";
+import { Tender } from "@/lib/models/tenders/tender";
 
 interface Props{
     tender:Tender
@@ -6,7 +6,7 @@ interface Props{
 
 export default function TenderDetailsStatistics({tender}:Props){
     return(
-        <div className="tender-details-statistics">
+        <div className="tender-details-statistics flex flex-wrap">
             <div className="statistic">
                 <div>الرقم المرجعي</div>
                 <div>{tender.reference_number}</div>

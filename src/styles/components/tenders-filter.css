@@ -9,6 +9,7 @@
 .tenders-search-field{
     background: var(--color-paper);
     color: var(--color-primary);
+
     border-radius: 5px !important;
     padding: 0px 16px !important;
     display: flex;
@@ -19,6 +20,7 @@
     /* border: rgba(50,50,50,0.2) 2px solid; */
 }
 .tenders-search-text-field{
+        min-width: 200px !important;
     background: var(--color-paper);
     color: var(--color-primary);
     border-radius: 10px;

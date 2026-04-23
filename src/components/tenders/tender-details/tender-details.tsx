@@ -17,7 +17,7 @@ export default function TenderDetails(){
     return(
         isLoading?<MutatingDots />  :
         data ? 
-        <div className="tender-details">
+        <div className="tender-details flex flex-col">
             <TenderDetailsHeader tender={data} />
             <div className="tender-details-contentt">
 
@@ -48,7 +48,7 @@ export default function TenderDetails(){
                             <TenderDetailsClassificationSection tender={data} />
                         </AccordionContent>
                     </AccordionItem>
-                    <AccordionItem value="classification">
+                    <AccordionItem value="localContent">
                         <AccordionTrigger>
                             المحتوى المحلى
                         </AccordionTrigger>

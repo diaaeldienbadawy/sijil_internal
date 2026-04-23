@@ -1,43 +1,54 @@
 import LabeledInput from "@/components/form/labeled-input"
 import useTendersFilter from "./use-tenders-filter"
 import SearchInput from "@/components/form/serach-input"
-import { Delete, DeleteIcon, ListCollapseIcon, Minus, Plus, Trash, Trash2, XIcon } from "lucide-react"
 import FormButton from "@/components/form/from-button"
 import { tenderStateList } from "./tender-state-list"
-import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuGroup, DropdownMenuLabel, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { set } from "date-fns"
+import dayjs from "dayjs"
+import { setAwardingPublished, setBidEvaluationDateFrom, setBidEvaluationDateTo, setBidOpeningDateFrom, setBidOpeningDateTo, setBidSubmissionDeadlineDateAvailability, setBidSubmissionDeadlineDateFrom, setBidSubmissionDeadlineDateTo, setCompetitionStatus, setExpectedAwardDateAvailability, setExpectedAwardDateFrom, setExpectedAwardDateTo, setInquiriesDateAvailability, setInquiriesDateFrom, setInquiriesDateTo, setPublishDateAvailability, setPublishDateFrom, setPublishDateTo, setQuestionsStartDateAvailability, setQuestionsStartDateFrom, setQuestionsStartDateTo, setReferenceNumber, setReferenceNumberAvailability, setSearch, setSearchMode, setSenderId, setSenderIdAvailability, setTenderNumber, setTenderNumberAvailability, setWorkStartDateAvailability, setWorkStartDateFrom, setWorkStartDateTo } from "@/lib/redux/slices/state_slices/tender-filter-content-slice"
+import FiltersList from "./filters-list"
 
 export default function TendersFilter(){
     const {
-        search, 
-        setSearch , 
-        searchMode, 
-        setSearchMode, 
-        filters, 
-        setFilters, 
-        updateFilterValue, 
-        awardingPublished, 
-        setAwardingPublished,
-        updateFilterAvailablity
+        filters,
+        searchAction,
+        dispatch,
+        anyFilterAvailable
     } = useTendersFilter()
     
     return( 
-        <div className="tenders-filter-card  bg-[rgba(200,200,200,0.1)] rounded-md border border-1">
-            <div className="p-1 flex justify-between w-full">
-                <div className="flex gap-x-4">
-                    <div className="flex">
+        <div className="tenders-filter-card bg-[rgba(200,200,200,0.1)] rounded-md border border-1">
+            <div className="p-1 flex justify-between flex-wrap w-full">
+                <div className="flex  gap-4 lg:hidden justify-end w-full ">
+                    <div className="">
+                        <FiltersList filters={filters}/>
+                    </div>
+                    <div className="flex text-primary cursor-pointer hover:text-gold transition-colors duration-300">
+                        <div className="h-full p-0">                
+                            <div className="h-full p-0 flex">
+                                <FormButton 
+                                    varient="default" 
+                                    text="بحث" 
+                                    action={searchAction}
+                                    className="w-full text-paper px-5 rounded-md text-md hover:bg-primary-light hover:text-gold-light transition-colors duration-300 h-full m-auto"
+                                />
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+                <div className="flex gap-x-4 flex-wrap md:gap-0">
+                    <div className="flex py-2 w-full md:w-auto flex-col">
                         <SearchInput
                             className="tenders-search-field"
-                            value={search}
+                            value={filters.search.value}
                             setValue={setSearch}
                             placeholder="ابحث في المناقصات"
-                            searchMode={searchMode}
+                            searchMode={filters.search_mode.value}
                             setSearchMode={setSearchMode}
                         />
                     </div>
-                    <div className="flex gap-4">
-                        <div className="mx-auto">
-                            <select className="add-filter-select" value={'default'}>
+                    <div className="flex  flex-col gap-4 py-2 md:px-2 justify-start w-[100%] md:w-auto">
+                        <div className="w-full  h-full">
+                            <select className="add-filter-select w-full min-w-[200px]" value={filters.competition_status.value?? 'default'} onChange={(e)=>setCompetitionStatus(e.target.value)}>
                                 <option value="default" disabled defaultChecked >حالة المنافسة</option>
                                 {
                                     tenderStateList.map((state,index)=>(
@@ -47,64 +58,37 @@ export default function TendersFilter(){
                             </select>
                         </div>
                     </div>
-                    <div className="flex gap-4">
-                        <div className="my-auto">
-                             نشر الترسية  :      
-                        </div>
-                        <div 
-                            className={`my-auto border border-1 border-gray-300 py-1 px-5 rounded-xl cursor-pointer ${awardingPublished == true ? 'bg-primary-light text-paper':''}`}  
-                            onClick={()=>setAwardingPublished(awardingPublished == true ? undefined : true)}    
-                        >
-                            نعم
-                        </div>
-                        <div 
-                            className={`my-auto border border-1 border-gray-300 py-1 px-5 rounded-xl cursor-pointer ${awardingPublished == false ? 'bg-primary-light text-paper':''}`}
-                            onClick={()=>setAwardingPublished(awardingPublished == false ? undefined : false)}   
-                        >
-                            لا
+                    <div className="flex flex-col gap-1 py-3 md:px-2 justify-start w-[100%] md:w-auto">
+                        <div className="flex gap-2">
+                            <div className="my-auto text-nowrap px-2">
+                                 نشر الترسية  :      
+                            </div>
+                            <div 
+                                className={`my-auto border border-1 border-gray-300 py-1 px-5 rounded-xl cursor-pointer ${filters.awarding_published.value == true ? 'bg-primary-light text-paper':''}`}  
+                                onClick={()=>setAwardingPublished(filters.awarding_published.value == true ? undefined : true)}    
+                            >
+                                نعم
+                            </div>
+                            <div 
+                                className={`my-auto border border-1 border-gray-300 py-1 px-5 rounded-xl cursor-pointer ${filters.awarding_published.value == false ? 'bg-primary-light text-paper':''}`}
+                                onClick={()=>setAwardingPublished(filters.awarding_published.value == false ? undefined : false)}   
+                            >
+                                لا
+                            </div>
                         </div>
                     </div>
-                    
                 </div>
-
-                <div className="flex gap-4">
-                    <div className="m-auto">
-                        <DropdownMenu>
-                            <DropdownMenuTrigger className="outline-none">
-                                <div className="add-filter-select">
-                                    الفلاتر
-                                </div>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className="add-filter-select-content">
-                                <DropdownMenuGroup   className="add-filter-select-group">
-                                    <DropdownMenuLabel className="text-md text-muted">اختر الفلاتر المطلوبة</DropdownMenuLabel>
-                                    {
-                                        filters.map(({name,available},index) => (
-                                            <DropdownMenuCheckboxItem 
-                                                
-                                                className={`focus:outline-none cursor-pointer ${available ? "bg-primary-light text-gold-light" : ""}`} 
-                                                onClick={e=>{
-                                                    e.preventDefault()
-                                                            
-                                                    updateFilterAvailablity(name,!available)
-                                                }} 
-                                                key={index} 
-                                                checked={available}
-                                            >
-                                                {name}
-                                            </DropdownMenuCheckboxItem>
-                                        ))
-                                    }
-                                </DropdownMenuGroup>
-                            </DropdownMenuContent>
-                        </DropdownMenu>
+                <div className="gap-2 py-2 hidden lg:flex ">
+                    <div className="mx-auto">
+                        <FiltersList filters={filters}/>            
                     </div>
                     <div className="flex text-primary cursor-pointer hover:text-gold transition-colors duration-300">
-                        <div className="h-full p-0">                
-                            <div className="h-full p-0 flex">
+                        <div className=" p-0">                
+                            <div className=" p-0 h-full flex">
                                 <FormButton 
                                     varient="default" 
                                     text="بحث" 
+                                    action={searchAction}
                                     className="w-full text-paper px-5 rounded-md text-md hover:bg-primary-light hover:text-gold-light transition-colors duration-300 h-full m-auto"
                                 />
                             </div>
@@ -112,263 +96,217 @@ export default function TendersFilter(){
                     </div>
                 </div>
             </div>
-            <div className="p-1 py-5 flex w-full flex-wrap gap-7 ">
+            <div className= {`${anyFilterAvailable ? 'p-1 py-5' : ''}  flex w-full flex-wrap gap-7 `}>
                 {
-                    filters.map(({name,available,data},index)=>{
-                        if(!available) return null;
-                        return(
-                            <div key={index} className="flex gap-2"> 
-                            {
-                                data.map(({value,type,param},index)=>(
-                                    type == 'text' ? 
-                                        <LabeledInput 
-                                            label={name} 
-                                            type="text" 
-                                            inputClassName="input-field"
-                                            containerClassName="w-full"
-                                            placeholder={name+'...'}
-                                            value={value}
-                                            setValue={(e)=>updateFilterValue(name,param,e)}
-                                        /> :
-                                        type == 'date' ? 
-                                            <LabeledInput
-                                                label={index == 0 ? name : '( الى )'}
-                                                type="date"
-                                                inputClassName="input-field"
-                                                containerClassName="w-full"
-                                                value={value}
-                                                setValue={(e)=>updateFilterValue(name,param,e)}
-                                            /> :
-                                            null
-                                ))
-                            }
-                            </div>
-                        )
-                    })
-                }
-                {/* {
-                    filters.senderId.available && 
-                    <div className="flex"> 
+                    filters.sender_id.available && 
+                    <div className="flex gap-2">
                         <LabeledInput 
-                            label={filters.senderId.name} 
+                            label={filters.sender_id.name} 
                             type="text" 
                             inputClassName="input-field"
-                            containerClassName="w-full"
+                            containerClassName="w-full flex flex-col justify-end"
+                            placeholder={filters.sender_id.name+'...'}
+                            value={filters.sender_id.value}
+                            setValue={(e)=>dispatch(setSenderId(e))}
                         /> 
-                        <div className="flex justify-center items-end py-6 px-1">
-                            <XIcon className="text-muted hover:text-error cursor-pointer" onClick={()=>{
-                                setFilters(prev=>{
-                                        return {
-                                            ...prev, senderId:{ ...prev.senderId ,available: !prev.senderId.available}
-                                        }
-                                    })
-                                }}
-                                size={20}
-                            />
-                        </div>
-                    </div>
+                    </div>     
                 }
                 {
-                    filters.awardingPublished.available && 
-                    <div> 
+                    filters.reference_number.available && 
+                    <div className="flex gap-2">
                         <LabeledInput 
-                            label={filters.awardingPublished.name} 
+                            label={filters.reference_number.name} 
                             type="text" 
                             inputClassName="input-field"
-                            containerClassName="w-full"
+                            containerClassName="w-full flex flex-col justify-end"
+                            placeholder={filters.reference_number.name+'...'}
+                            value={filters.reference_number.value}
+                            setValue={(e)=>dispatch(setReferenceNumber(e))}
                         /> 
-                    </div>
+                    </div>     
                 }
                 {
-                    filters.competitionStatus.available && 
-                    <div> 
-                        <LabeledInput
-                            label={filters.competitionStatus.name}
-                            type="text"
+                    filters.tender_number.available && 
+                    <div className="flex gap-2">
+                        <LabeledInput 
+                            label={filters.tender_number.name} 
+                            type="text" 
                             inputClassName="input-field"
-                            containerClassName="w-full"
-                        />
-                    </div>
+                            containerClassName="w-full flex flex-col justify-end"
+                            placeholder={filters.tender_number.name+'...'}
+                            value={filters.tender_number.value}
+                            setValue={(e)=>dispatch(setTenderNumber(e))}
+                        /> 
+                    </div>     
                 }
                 {
-                    filters.publishDateFrom.available && 
-                    <div> 
+                    filters.publish_date.available && 
+                    <div className="flex gap-2">
                         <LabeledInput
-                            label={filters.publishDateFrom.name}
+                            label={filters.publish_date.name + '( من )'}
                             type="date"
                             inputClassName="input-field"
-                            containerClassName="w-full"
+                            containerClassName="w-full flex flex-col justify-end"
+                            value={filters.publish_date.from}
+                            setValue={(e)=>dispatch(setPublishDateFrom(e))}
                         />
-                    </div>
-                }
-                {
-                    filters.publishDateTo.available &&
-                    <div>
                         <LabeledInput
-                            label={filters.publishDateTo.name}
+                            label={ '( الى )'}
                             type="date"
                             inputClassName="input-field"
-                            containerClassName="w-full"
-                            value={}
+                            containerClassName="w-full flex flex-col justify-end"
+                            value={filters.publish_date.to}
+                            setValue={(e)=>dispatch(setPublishDateTo( e))}
                         />
-                    </div>
+                    </div>     
                 }
                 {
-                    filters.inquiriesDeadlineDateFrom.available &&
-                    <div>
+                    filters.inquiries_deadline_date.available && 
+                    <div className="flex gap-2">
                         <LabeledInput
-                            label={filters.inquiriesDeadlineDateFrom.name}
+                            label={filters.inquiries_deadline_date.name + '( من )'}
                             type="date"
                             inputClassName="input-field"
-                            containerClassName="w-full"
+                            containerClassName="w-full flex flex-col justify-end"
+                            value={filters.inquiries_deadline_date.from}
+                            setValue={(e)=>dispatch(setInquiriesDateFrom(e))}
                         />
-                    </div>
-                }
-                {
-                    filters.inquiriesDeadlineDateTo.available &&
-                    <div>
                         <LabeledInput
-                            label={filters.inquiriesDeadlineDateTo.name}
-                            type="date"
-                            inputClassName="input-field"  
-                            containerClassName="w-full"
-                        />
-                    </div>
-                }
-                {
-                    filters.bid_evaluationDateFrom.available &&
-                    <div>
-                        <LabeledInput
-                            label={filters.bid_evaluationDateFrom.name}
+                            label={ '( الى )'}
                             type="date"
                             inputClassName="input-field"
-                            containerClassName="w-full"
+                            containerClassName="w-full flex flex-col justify-end"
+                            value={filters.inquiries_deadline_date.to}
+                            setValue={(e)=>dispatch(setInquiriesDateTo(e))}
                         />
-                    </div>
+                    </div>     
                 }
                 {
-                    filters.bid_evaluationDateTo.available &&
-                    <div>
+                    filters.bid_evaluation_date.available && 
+                    <div className="flex gap-2">
                         <LabeledInput
-                            label={filters.bid_evaluationDateTo.name}
+                            label={filters.bid_evaluation_date.name + '( من )'}
                             type="date"
                             inputClassName="input-field"
-                            containerClassName="w-full"
+                            containerClassName="w-full flex flex-col justify-end"
+                            value={filters.bid_evaluation_date.from}
+                            setValue={(e)=>dispatch(setBidEvaluationDateFrom(e))}
                         />
-                    </div>
+                        <LabeledInput
+                            label={ '( الى )'}
+                            type="date"
+                            inputClassName="input-field"
+                            containerClassName="w-full flex flex-col justify-end"
+                            value={filters.bid_evaluation_date.to}
+                            setValue={(e)=>dispatch(setBidEvaluationDateTo(e))}
+                        />
+                    </div>     
                 }
                 {
-                    filters.expectedAwardDateFrom.available &&
-                    <div>
+                    filters.expected_award_date.available && 
+                    <div className="flex gap-2">
                         <LabeledInput
-                            label={filters.expectedAwardDateFrom.name}
+                            label={filters.expected_award_date.name + '( من )'}
                             type="date"
                             inputClassName="input-field"
-                            containerClassName="w-full"
+                            containerClassName="w-full flex flex-col justify-end"
+                            value={filters.expected_award_date.from}
+                            setValue={(e)=>dispatch(setExpectedAwardDateFrom(e))}
                         />
-                    </div>
+                        <LabeledInput
+                            label={ '( الى )'}
+                            type="date"
+                            inputClassName="input-field"
+                            containerClassName="w-full flex flex-col justify-end"
+                            value={filters.expected_award_date.to}
+                            setValue={(e)=>dispatch(setExpectedAwardDateTo(e))}
+                        />
+                    </div>     
                 }
                 {
-                    filters.expectedAwardDateTo.available &&
-                    <div>
+                    filters.work_start_date.available && 
+                    <div className="flex gap-2">
                         <LabeledInput
-                            label={filters.expectedAwardDateTo.name}
+                            label={filters.work_start_date.name + '( من )'}
                             type="date"
                             inputClassName="input-field"
-                            containerClassName="w-full"
+                            containerClassName="w-full flex flex-col justify-end"
+                            value={filters.work_start_date.from}
+                            setValue={(e)=>dispatch(setWorkStartDateFrom(e))}
                         />
-                    </div>
+                        <LabeledInput
+                            label={ '( الى )'}
+                            type="date"
+                            inputClassName="input-field"
+                            containerClassName="w-full flex flex-col justify-end"
+                            value={filters.work_start_date.to}
+                            setValue={(e)=>dispatch(setWorkStartDateTo(e))}
+                        />
+                    </div>     
                 }
                 {
-                    filters.workStartDateFrom.available &&
-                    <div>
+                    filters.questions_start_date.available && 
+                    <div className="flex gap-2">
                         <LabeledInput
-                            label={filters.workStartDateFrom.name}
+                            label={filters.questions_start_date.name + '( من )'}
                             type="date"
                             inputClassName="input-field"
-                            containerClassName="w-full"
+                            containerClassName="w-full flex flex-col justify-end"
+                            value={filters.questions_start_date.from}
+                            setValue={(e)=>dispatch(setQuestionsStartDateFrom(e))}
                         />
-                    </div>
+                        <LabeledInput
+                            label={ '( الى )'}
+                            type="date"
+                            inputClassName="input-field"
+                            containerClassName="w-full flex flex-col justify-end"
+                            value={filters.questions_start_date.to}
+                            setValue={(e)=>dispatch(setQuestionsStartDateTo(e))}
+                        />
+                    </div>     
                 }
                 {
-                    filters.workStartDateTo.available &&
-                    <div>
+                    filters.bid_submission_deadline.available && 
+                    <div className="flex gap-2">
                         <LabeledInput
-                            label={filters.workStartDateTo.name}
+                            label={filters.bid_submission_deadline.name + '( من )'}
                             type="date"
                             inputClassName="input-field"
-                            containerClassName="w-full"
+                            containerClassName="w-full flex flex-col justify-end"
+                            value={filters.bid_submission_deadline.from}
+                            setValue={(e)=>dispatch(setBidSubmissionDeadlineDateFrom(e))}
                         />
-                    </div>
+                        <LabeledInput
+                            label={ '( الى )'}
+                            type="date"
+                            inputClassName="input-field"
+                            containerClassName="w-full flex flex-col justify-end"
+                            value={filters.bid_submission_deadline.to}
+                            setValue={(e)=>dispatch(setBidSubmissionDeadlineDateTo(e))}
+                        />
+                    </div>     
                 }
                 {
-                    filters.questionStartDateFrom.available &&
-                    <div>
+                    filters.bid_opening.available && 
+                    <div className="flex gap-2">
                         <LabeledInput
-                            label={filters.questionStartDateFrom.name}
+                            label={filters.bid_opening.name + '( من )'}
                             type="date"
                             inputClassName="input-field"
-                            containerClassName="w-full"
+                            containerClassName="w-full flex flex-col justify-end"
+                            value={filters.bid_opening.from}
+                            setValue={(e)=>dispatch(setBidOpeningDateFrom({ e: e ? dayjs(e): undefined}))}
                         />
-                    </div>
+                        <LabeledInput
+                            label={ '( الى )'}
+                            type="date"
+                            inputClassName="input-field"
+                            containerClassName="w-full flex flex-col justify-end"
+                            value={filters.bid_opening.to}
+                            setValue={(e)=>dispatch(setBidOpeningDateTo({ e: e ? dayjs(e): undefined}))}
+                        />
+                    </div>     
                 }
-                {
-                    filters.questionStartDateTo.available &&
-                    <div>
-                        <LabeledInput
-                            label={filters.questionStartDateTo.name}
-                            type="date"
-                            inputClassName="input-field"
-                            containerClassName="w-full"
-                        />
-                    </div>
-                }
-                {
-                    filters.bidSubmissionDeadlineDateFrom.available &&
-                    <div>
-                        <LabeledInput
-
-                            label={filters.bidSubmissionDeadlineDateFrom.name}
-                            type="date"
-                            inputClassName="input-field"
-                            containerClassName="w-full"
-                        />
-                    </div>
-                }
-                {
-                    filters.bidSubmissionDeadlineDateTo.available &&
-                    <div>
-                        <LabeledInput
-
-                            label={filters.bidSubmissionDeadlineDateTo.name}
-                            type="date"
-                            inputClassName="input-field"
-                            containerClassName="w-full"
-                        />
-                    </div>
-                }
-                {
-                    filters.bidOpeningDateFrom.available &&
-                    <div>
-                        <LabeledInput
-                            label={filters.bidOpeningDateFrom.name}
-                            type="date"
-                            inputClassName="input-field"
-                            containerClassName="w-full"
-                        />
-                    </div>
-                }
-                {
-                    filters.bidOpeningDateTo.available &&
-                    <div>
-                        <LabeledInput
-                            label={filters.bidOpeningDateTo.name}
-                            type="date"
-                            inputClassName="input-field"
-                            containerClassName="w-full"
-                        />
-                    </div>
-                } */}
             </div>
         </div>
     )

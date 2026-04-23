@@ -1,5 +1,5 @@
 
-import { TenderMin } from "@/lib/models/tender-min"
+import { TenderMin } from "@/lib/models/tenders/tender-min"
 import CardTitle from "./card-title"
 import CardHeader from "./card-header"
 import CardDescription from "./card-description"

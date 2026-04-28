@@ -32,7 +32,7 @@ export const tenderFilterContentSlice = createSlice(
             },
             setSearchMode:(state,action)=>{
                 const value = action.payload as TenderSearchMode|undefined
-                return {...state,search_mode:{...state.search_mode, value:value??'smart'}}
+                return {...state,search_mode:{...state.search_mode, value:value}}
             },
             setAwardingPublished:(state,action)=>{
                 const value = action.payload as boolean|undefined

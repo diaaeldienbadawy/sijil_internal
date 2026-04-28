@@ -1,8 +1,5 @@
 import { JudgeDetailsResponse } from "@/lib/api/responses/judge-details-response";
 import NumbersHelper from "@/lib/helpers/numbers-helper";
-import { JudgmentDetail } from "@/lib/models/judges/judgement-details";
-import { Tender } from "@/lib/models/tenders/tender";
-import { CalendarRangeIcon } from "lucide-react";
 
 interface Props{
     judgement:JudgeDetailsResponse

@@ -20,7 +20,7 @@ interface Props{
     setValue?:Dispatch<SetStateAction<string|undefined>>
     placeholder?:string
     searchMode?: JudgesSearchMode | TenderSearchMode
-    setSearchMode?:(mode:JudgesSearchMode | TenderSearchMode)=>void
+    setSearchMode?:(mode?:JudgesSearchMode | TenderSearchMode)=>void
     type:string
 }
 
@@ -59,7 +59,7 @@ export default function SearchInput({className,id,type,value,setValue,placeholde
                         <div className="flex justify-center items-center">
                             <div 
                                 className= {`search-mode ${searchMode  === "smart" ? "selected-search-mode" : ""}`}
-                                onClick={()=>setSearchMode?.('smart')}    
+                                onClick={()=>setSearchMode?.(searchMode === 'smart' ? undefined:'smart')}    
                                 >
                                 تلقائي
                             </div>
@@ -67,7 +67,7 @@ export default function SearchInput({className,id,type,value,setValue,placeholde
                         <div className="flex justify-center items-center">
                             <div 
                                 className= {`search-mode ${searchMode  === "phrase" ? "selected-search-mode" : ""}`}
-                                onClick={()=>setSearchMode?.('phrase')}    
+                                onClick={()=>setSearchMode?.(searchMode === 'phrase' ? undefined :'phrase')}    
                                 >
                                 جمل
                             </div>
@@ -75,7 +75,7 @@ export default function SearchInput({className,id,type,value,setValue,placeholde
                         <div className="flex justify-center items-center">
                             <div 
                                 className= {`search-mode ${searchMode  === "tokens" ? "selected-search-mode" : ""}`}
-                                onClick={()=>setSearchMode?.('tokens')}    
+                                onClick={()=>setSearchMode?.(searchMode === 'tokens' ? undefined : 'tokens')}    
                                 >
                                كلمات
                             </div>
@@ -87,7 +87,7 @@ export default function SearchInput({className,id,type,value,setValue,placeholde
                         <div className="flex justify-center items-center">
                             <div 
                                 className= {`search-mode ${searchMode === "any" ? "selected-search-mode" : ""}`}
-                                onClick={()=>setSearchMode?.("any")}    
+                                onClick={()=>setSearchMode?.(searchMode === 'any' ? undefined : "any")}    
                                 >
                                 اي كلمة
                             </div>
@@ -95,7 +95,7 @@ export default function SearchInput({className,id,type,value,setValue,placeholde
                         <div className="flex justify-center items-center">
                             <div 
                                 className= {`search-mode ${searchMode === "all" ? "selected-search-mode" : ""}`}
-                                onClick={()=>setSearchMode?.("all")}    
+                                onClick={()=>setSearchMode?.(searchMode === 'all' ? undefined :"all")}    
                                 >
                                 جميع الكلمات
                             </div>
@@ -103,7 +103,7 @@ export default function SearchInput({className,id,type,value,setValue,placeholde
                         <div className="flex justify-center items-center">
                             <div 
                                 className= {`search-mode ${searchMode === "exact" ? "selected-search-mode" : ""}`}
-                                onClick={()=>setSearchMode?.("exact")}    
+                                onClick={()=>setSearchMode?.(searchMode === 'exact' ? undefined : "exact")}    
                                 >
                                 مطابقة
                             </div>
@@ -111,7 +111,7 @@ export default function SearchInput({className,id,type,value,setValue,placeholde
                         <div className="flex justify-center items-center">
                             <div 
                                 className= {`search-mode ${searchMode === "exact_number" ? "selected-search-mode" : ""}`}
-                                onClick={()=>setSearchMode?.("exact_number")}    
+                                onClick={()=>setSearchMode?.(searchMode === 'exact_number' ? undefined : "exact_number")}    
                                 >
                                 رقم القضية/الحكم
                             </div>
@@ -123,15 +123,5 @@ export default function SearchInput({className,id,type,value,setValue,placeholde
             </InputGroupAddon>
           </InputGroup>
 
-    )
-    return(
-        <input 
-            ref={ref}
-            id={id} 
-            className={`${className}`} 
-            value={value ?? ""} 
-            placeholder={placeholder} 
-            onChange={e=>setValue?.(e.target.value)}
-        />
     )
 }

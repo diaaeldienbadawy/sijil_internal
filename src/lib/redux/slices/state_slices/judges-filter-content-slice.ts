@@ -16,7 +16,6 @@ export const judgesFilterContentSlice = createSlice(
                 return {...state,search:value}
             },
             setSearchMode:(state,action)=>{
-                console.log("searchhh ",action.payload)
                 const value = action.payload as JudgesSearchMode|undefined
                 console.log("searchhh ",value)
                 return {...state,searchMode:value}

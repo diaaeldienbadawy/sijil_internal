@@ -5,11 +5,15 @@
     
 }
 
-@import './components/form.css';
+@import './components/form-elements/buttons.css';
+@import './components/form-elements/input-fields.css';
+@import './components/form-elements/tabs.css';
+@import './components/form-elements/droplists.css';
+
 @import './components/navbar.css';
 @import './components/pagination.css';
 @import './components/card.css';
 @import './components/popover-content.css';
 @import './components/popover-dialog.css';
 
-@import './components/tenders-filter.css';
+@import './components/tenders.css';

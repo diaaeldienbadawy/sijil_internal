@@ -1,31 +1,4 @@
-.input-field{
-    background: var(--color-paper);
-    color: var(--color-primary);
-    border-radius: 5px !important;
-    padding: 8px 16px !important;
-    display: flex;
-    gap: 2px;
-    /* box-shadow: var(--color-primary ) 0px 0px 2px 0.1px; */
-    font-size: larger ;
-        border: rgba(50,50,50,0.05) 1px solid !important;
-        border-bottom: 2px solid var(--color-gold) !important;
-}
-.input-field:focus{
-    outline: var(--color-gold-light) 1px solid;
-}
-
-.reactive-tab{
-    font-family: var(--tajawal-font-family);
-    color: var(--color-primary);
-    font-size: medium;
-    padding: 5px 15px;
-}
-
-.reactive-tab.selected{
-    border-bottom: 2px solid var(--color-primary-light);
-    transition: all ease-in-out 0.3s;
-}
-
+/* buttons */
 .spin-border-btn {
   position: relative;
   font-size: 16px;
@@ -36,7 +9,6 @@
   overflow: hidden;
 }
 
-/* الخلفية اللي بتلف */
 .spin-border-btn::before {
   content: "";
   position: absolute;
@@ -45,17 +17,7 @@
   width: 100%;
   top: -250%;
   right: 0%;
-  /* background: conic-gradient(
-    red,
-    orange,
-    yellow,
-    green,
-    cyan,
-    blue,
-    violet,
-    red
-  ); */
-
+  
   background: conic-gradient(
     var(--color-gold),
     var(--color-gold-light),

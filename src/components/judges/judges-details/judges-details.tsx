@@ -12,7 +12,7 @@ export default function JudgesDetails({caseIndex}:{caseIndex:number}){
     return(
          isLoading?<MutatingDots/>  :
         data ? 
-        <div className="popover-content-details flex flex-col h-full max-w-[1000px]">
+        <div className="flex flex-col h-full max-w-[1000px] popover-content-details ">
             <JudgesDetailsHeader judgement={data as JudgeDetailsResponse} />
             <div className="p-3 ">
                 <JudgesDetailsContent judgement={data as JudgeDetailsResponse}/>

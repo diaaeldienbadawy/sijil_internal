@@ -1,0 +1,12 @@
+/* tabs */
+.reactive-tab{
+    font-family: var(--tajawal-font-family);
+    color: var(--color-primary);
+    font-size: medium;
+    padding: 5px 15px;
+}
+
+.reactive-tab.selected{
+    border-bottom: 2px solid var(--color-primary-light);
+    transition: all ease-in-out 0.3s;
+}

@@ -17,13 +17,13 @@ export default function TenderDetails(){
     return(
         isLoading?<MutatingDots />  :
         data ? 
-        <div className="tender-details flex flex-col">
+        <div className="popover-content-details flex flex-col">
             <TenderDetailsHeader tender={data} />
-            <div className="tender-details-contentt">
+            <div className="popover-content-details-contentt">
 
                 <TenderDetailsTitle tender={data}/>
                 <TenderDetailsStatistics tender={data}/>
-                <Accordion className="tender-details-accordion lg:w-[1200px]" type="multiple" defaultValue={["dates","competionDetails","classification"]}>
+                <Accordion className="popover-content-details-accordion lg:w-[1200px]" type="multiple" defaultValue={["dates","competionDetails","classification"]}>
                     <AccordionItem value="dates">
                         <AccordionTrigger >
                              المواعيد و التواريخ        

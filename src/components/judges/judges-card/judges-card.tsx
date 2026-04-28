@@ -1,6 +1,5 @@
 import { JudgmentSummary } from "@/lib/models/judges/judgment-summary";
 import JudgeCardHeader from "./judge-card-header";
-import JudgeCardTitle from "./judge-card-title";
 import JudgeCardDescription from "./judge-card-description";
 import JudgeCardFooter from "./judge-card-footer";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";

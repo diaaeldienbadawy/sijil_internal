@@ -8,7 +8,7 @@ interface Props{
 
 export default function TenderDetailsStatistics({tender}:Props){
     return(
-        <div className="tender-details-statistics flex flex-wrap">
+        <div className="popover-content-details-statistics flex flex-wrap">
             <div className="statistic">
                 <div>الرقم المرجعي</div>
                 <div>{DateTimeHelper.dashToSlash(NumbersHelper.toArabicDigits(tender.reference_number??''))}</div>

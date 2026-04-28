@@ -9,7 +9,7 @@ interface Props{
 
 export default function TenderDetailsHeader({tender}:Props){
     return(
-        <div className="flex justify-between tender-details-header">
+        <div className="flex justify-between popover-content-details-header">
             <div className="flex">
                 <div>
                     {tender.tender_type}

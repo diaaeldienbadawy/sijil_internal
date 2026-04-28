@@ -71,6 +71,7 @@
 
 .card-description{
     padding: 20px 10px;
+    color: var(--color-text-muted);
 }
 
 .card-footer{

@@ -9,7 +9,7 @@ interface Props{
 
 export default function TenderDetailsTitle({tender}:Props){
     return(
-        <div className="tender-details-title">
+        <div className="popover-content-details-title">
             <div className="title">
                 {NumbersHelper.toArabicDigits(tender.name)}
             </div>

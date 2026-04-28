@@ -10,7 +10,7 @@ interface Props{
 
 export default function JudgesDetailsHeader({judgement}:Props){
     return(
-        <div className="flex justify-between tender-details-header">
+        <div className="flex justify-between popover-content-details-header">
             <div className="flex">
                 <div>
                     {NumbersHelper.toArabicDigits(judgement.initial_judgment.judgment_number)}

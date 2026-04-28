@@ -1,5 +1,4 @@
 import ReactiveTabs from "@/components/form/reactive-tabs";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { JudgeDetailsResponse } from "@/lib/api/responses/judge-details-response";
 import { useState } from "react";
 import JudgementContent from "./judgement-content";

@@ -7,24 +7,24 @@ interface Props{
 
 export default function TenderDetailsCompetionSection({tender}:Props){
     return(
-        <div className="tender-details-dates">
-            <div className="tender-details-date">
+        <div className="popover-content-details-dates">
+            <div className="popover-content-details-date">
                 <div className="text-muted">الغرض</div>
                 <div>{NumbersHelper.toArabicDigits(tender.purpose??'')}</div>
             </div>
-            <div className="tender-details-date">
+            <div className="popover-content-details-date">
                 <div className="text-muted">طريقة التقديم</div>
                 <div>{NumbersHelper.toArabicDigits(tender.submission_method??'')}</div>
             </div>
-            <div className="tender-details-date">
+            <div className="popover-content-details-date">
                 <div className="text-muted">مدة العقد</div>
                 <div>{NumbersHelper.toArabicDigits(tender.agreement_duration??'')}</div>
             </div>
-            <div className="tender-details-date">
+            <div className="popover-content-details-date">
                 <div className="text-muted">الضمان الابتدائي</div>
                 <div>{NumbersHelper.toArabicDigits(tender.preliminary_guarantee??'')}</div>
             </div>
-            <div className="tender-details-date">
+            <div className="popover-content-details-date">
                 <div className="text-muted">التأمين المطلوب</div>
                 <div>{NumbersHelper.toArabicDigits(tender.insurance_required??'')}</div>
             </div>

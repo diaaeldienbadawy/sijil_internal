@@ -1,4 +1,4 @@
-.tender-details{
+.popover-content-details{
     background: var(--color-paper);
     background: radial-gradient(circle at top right, var(--color-paper) 0%,white 20%,white 100%);
     border-radius: 10px;
@@ -10,7 +10,7 @@
     height: 100%;
 }
 
-.tender-details-header{
+.popover-content-details-header{
     color: var(--color-paper);
     padding: 10px;   
     border-bottom: 1px var(--color-border) solid ;
@@ -23,33 +23,33 @@
     font-size: x-large;
 }
 
-.tender-details-contentt{
+.popover-content-details-contentt{
     overflow: auto;
 }
 
-.tender-details-title{
+.popover-content-details-title{
     padding: 10px;
 }
 
-.tender-details-title .title{
+.popover-content-details-title .title{
     color: var(--color-primary);
     font-size: larger;
     font-weight: bold;
 }
 
-.tender-details-title .agency{
+.popover-content-details-title .agency{
     color: var(--color-gold);
     display: flex;
     padding : 5px 0px
 }
 
-.tender-details-statistics{
+.popover-content-details-statistics{
     padding: 10px;
     display: flex;
     gap: 15px;
 }
 
-.tender-details-statistics .statistic{
+.popover-content-details-statistics .statistic{
     padding: 10px;
     background: radial-gradient(circle at top right, var(--color-paper) -50%,rgb(var(--color-cream-code)) 50%,rgb(var(--color-cream-code)) 100%);
     border-radius: 10px;
@@ -59,18 +59,18 @@
     box-shadow: rgb(var(--color-primary-light-code)) 0px 0px 0px 1px ; 
 }
 
-.tender-details-accordion{
+.popover-content-details-accordion{
     padding: 15px 10px;
     row-gap: 10px;
 }
 
-.tender-details-accordion [data-slot="accordion-item"]{
+.popover-content-details-accordion [data-slot="accordion-item"]{
     box-shadow: rgb(var(--color-primary-light-code)/0.2) 0px 2px 2px 0.1px;
     padding: 0px 10px;
     border-radius: 10px;
 }
 
-.tender-details-accordion [data-slot="accordion-trigger"]{
+.popover-content-details-accordion [data-slot="accordion-trigger"]{
     direction: ltr;
     display: flex;
     column-gap: 5px;
@@ -79,24 +79,24 @@
     color: var(--color-primary);
 }
 
-.tender-details-dates{
+.popover-content-details-dates{
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
 }
 
-.tender-details-date{
+.popover-content-details-date{
     min-width: 200px;
     padding: 15px 5px;
     width: 30%;
 }
 
-.tender-details-footer{
+.popover-content-details-footer{
     padding: 10px;
     color: var(--color-text-muted);
 }
 
-.tender-details-footer .e3tmad-link{
+.popover-content-details-footer .e3tmad-link{
     background:  radial-gradient(circle at top right, white -100%,var(--color-gold) 50%, var(--color-gold) 100%);
     background-size: 200% ;
     background-position: left;
@@ -107,7 +107,7 @@
     transition: all ease-in-out 300ms;
 }
 
-.e3tmad-link:hover{
+.popover-content-details-footer .e3tmad-link:hover{
     background-position: right;
     color: var(--color-gold-light);
 }

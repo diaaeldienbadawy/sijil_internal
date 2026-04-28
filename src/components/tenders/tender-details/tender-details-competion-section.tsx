@@ -8,7 +8,7 @@ interface Props{
 export default function TenderDetailsCompetionSection({tender}:Props){
     return(
         <div className="popover-content-details-dates">
-            <div className="popover-content-details-date">
+            <div className="">
                 <div className="text-muted">الغرض</div>
                 <div>{NumbersHelper.toArabicDigits(tender.purpose??'')}</div>
             </div>

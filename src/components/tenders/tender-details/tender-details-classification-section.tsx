@@ -1,3 +1,4 @@
+import NumbersHelper from "@/lib/helpers/numbers-helper";
 import { Tender } from "@/lib/models/tenders/tender";
 
 interface Props{
@@ -9,11 +10,11 @@ export default function TenderDetailsClassificationSection({tender}:Props){
         <div className="tender-details-dates">
             <div className="tender-details-date">
                 <div className="text-muted">مجال التصنيف</div>
-                <div>{tender.classification?.classification_field}</div>
+                <div>{NumbersHelper.toArabicDigits(tender.classification?.classification_field??'')}</div>
             </div>
             <div className="tender-details-date">
                 <div className="text-muted">نطاق التنفيذ</div>
-                <div>{tender.classification?.execution_place?.scope}</div>
+                <div>{NumbersHelper.toArabicDigits(tender.classification?.execution_place?.scope??'')}</div>
             </div>
             <div className="tender-details-date w-full">
                 <div className="text-muted">مناطق التنفيذ</div>

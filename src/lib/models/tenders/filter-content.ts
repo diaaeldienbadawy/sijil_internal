@@ -1,4 +1,4 @@
-import { TenderSearchMode } from "../../api/params/tender-search-mode"
+import { TenderSearchMode } from "./tender-search-mode"
 
 export interface FilterContents{
     search : {

@@ -16,13 +16,14 @@ export const tendersSlice = createSlice(
             })
             .addCase(getTenders.rejected, (state,action)=>{
                 state.isLoading = false;
-                state.error = action.error.message || "Api Failed"
+                state.error = action.payload?.detail
+                state.data = undefined
                 return state
             })
             .addCase(getTenders.fulfilled, (state,action)=>{
                 state.isLoading = false;
                 state.error = undefined;
-                state.data = action.payload
+                state.data = action.payload as TenderListResponse
                 return state
             })
         }

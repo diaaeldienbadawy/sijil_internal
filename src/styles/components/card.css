@@ -5,13 +5,13 @@
     border-radius: 10px;
     padding: 0px 10px;
     box-shadow: rgb(200, 200, 200) 0px 0px 3px 0.05px ;
-    transition: all ease-in-out 300ms;
+    transition: all ease-in-out 200ms;
     font-family: var(--tajawal-font-family);
     overflow: hidden;
     cursor: pointer;
 }
 .card:hover {
-    transform: translateX(-5px);
+    scale: 1.01;
 }
 
 .card::after {
@@ -22,7 +22,7 @@
     right: -5px;
     width: 5px;
     background: var(--color-gold);
-    transition: all ease-in-out 0.3s;
+    transition: all ease-in-out 0.2s;
 }
 .card:hover::after{
     right: 0;
@@ -41,7 +41,7 @@
     font-size: medium; */
     padding: 10px;
     font-family: var(--amiri-font-family);
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
     color: var(--color-primary);
 }
@@ -53,6 +53,8 @@
 
 .card-title{
     padding: 10px;
+    font-size: medium;
+    font-family: var(--tajawal-font-family);
 }
 
 .card-title .title{
@@ -86,4 +88,9 @@
 
 .e3tmad-link:hover{
     color: var(--color-primary);
+}
+
+.highlight{
+    background: yellow;
+    color: black;
 }

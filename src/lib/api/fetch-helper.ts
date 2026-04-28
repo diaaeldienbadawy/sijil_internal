@@ -16,6 +16,7 @@ export class FetchHelper{
                             try{
                                 let accessToken = await cookieStore.get("access_token")
                                 if(accessToken){
+                                    console.log("access_token",accessToken)
                                     const response = await axios.post(
                                         API_ENDPOINTS.AUTH.REFRESH, 
                                         null, 
@@ -23,9 +24,9 @@ export class FetchHelper{
                                             headers:{
                                                 "Authorization" : `bearer ${accessToken.value}`
                                             }, 
-                                            withCredentials:true
+                                            withCredentials:false
                                         })
-
+                                    
                                     if(response.status >= 200 && response.status <210){
                                         const newToken = (response.data as TokenResponse).access_token
                                         await cookieStore.set("access_token",newToken)
@@ -64,7 +65,6 @@ export class FetchHelper{
     }
 
     static async get<TResponse>(endPoint : string,{needAuthorization = true,onError}:{needAuthorization?:boolean, onError?:()=>void}) {
-        try{
             const access_token = await cookieStore.get("access_token")
 
             const response = await this.createAxios({hasRefreshInterceptor:true}).get(endPoint,
@@ -79,14 +79,9 @@ export class FetchHelper{
 
             const responseData:TResponse = await response.data
             return responseData;
-        }
-        catch(e){
-            onError?.()
-        }
     }
 
     static async post<TData,TResponse>(endPoint:string, {needAuthorization= true,data,onError}:{needAuthorization?:boolean, data:TData, onError?:()=>void}){
-        try{
             const access_token = await cookieStore.get("access_token")
             const response = await axios.post(endPoint, data,
                 {
@@ -100,13 +95,8 @@ export class FetchHelper{
 
             const responseData:TResponse = await response.data
             return responseData;
-        }catch(e){
-            console.log("error" , e)
-            onError?.()
-        }
     }
     static async emptyPost<TResponse>(endPoint:string, {needAuthorization= true,onError}:{needAuthorization?:boolean, onError?:()=>void}){
-        try{
             const access_token = await cookieStore.get("access_token")
             const response = await axios.post(endPoint, null,
                 {
@@ -120,14 +110,9 @@ export class FetchHelper{
 
             const responseData:TResponse = await response.data
             return responseData;
-        }catch(e){
-            console.log("error" , e)
-            onError?.()
-        }
     }
 
     static async postForm<TData,TResponse>(endPoint:string,{needAuthorization= true,data,onError}:{needAuthorization?:boolean, data:TData, onError?:()=>void}){
-        try{
             const access_token = await cookieStore.get("access_token")
             
             const response = await axios.postForm(
@@ -140,11 +125,7 @@ export class FetchHelper{
                 }
               }
             );
-        
+
             return response.data as TResponse;
-        }catch(e){
-            console.log("error" , e)
-            onError?.()
-        }
     }
 }

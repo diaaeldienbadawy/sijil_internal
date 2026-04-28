@@ -5,6 +5,7 @@
     justify-content: center;
     position: fixed;
     padding: 8px;
+    z-index: 100;
     cursor: pointer;
 }
 

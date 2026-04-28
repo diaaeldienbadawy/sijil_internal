@@ -16,13 +16,14 @@ export const judgesSlice = createSlice(
             })
             .addCase(getJudgesListRequest.rejected, (state,action)=>{
                 state.isLoading = false;
-                state.error = action.error.message || "Api Failed"
+                state.error = action.payload?.detail
+                state.data = undefined
                 return state
             })
             .addCase(getJudgesListRequest.fulfilled, (state,action)=>{
                 state.isLoading = false;
                 state.error = undefined;
-                state.data = action.payload
+                state.data = action.payload as JudgesSearchResponse
                 return state
             })
         }

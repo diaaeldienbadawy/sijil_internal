@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { FilterContents } from "@/lib/models/tenders/filter-content"
-import { TenderSearchMode } from "@/lib/api/params/tender-search-mode"
+import { TenderSearchMode } from "@/lib/models/tenders/tender-search-mode"
 
 
 const initialData: FilterContents =  {

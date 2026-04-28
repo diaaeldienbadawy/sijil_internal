@@ -1,5 +1,5 @@
 import TenderListParams from "../api/params/tender-list-params";
-import { TenderSearchMode } from "../api/params/tender-search-mode";
+import { TenderSearchMode } from "../models/tenders/tender-search-mode";
 import { FilterContents } from "../models/tenders/filter-content";
 
 export default class TenderHelper{

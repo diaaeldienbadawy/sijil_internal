@@ -1,13 +1,18 @@
+import HighlightedText from "@/components/utility/spinners/highlighted-text"
 import { TenderMin } from "@/lib/models/tenders/tender-min"
 
 interface Props {
-    tender : TenderMin
+    tender : TenderMin,
+    highlightText?:string
 }
 
-export default function CardDescription({tender}:Props){
+export default function CardDescription({tender,highlightText}:Props){
     return(
         <div className="card-description">
-            {tender.purpose}
+            <HighlightedText
+                text={tender.purpose}
+                highlight={highlightText}
+            />
         </div>
     )
 }

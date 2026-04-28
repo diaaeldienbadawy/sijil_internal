@@ -1,3 +1,5 @@
+import { DateTimeHelper } from "@/lib/helpers/date-time-helper"
+import NumbersHelper from "@/lib/helpers/numbers-helper"
 import { TenderMin } from "@/lib/models/tenders/tender-min"
 import { CalendarRangeIcon } from "lucide-react"
 
@@ -12,12 +14,14 @@ export default function CardHeader({tender}:Props){
                 <div>
                     {tender.tender_type}
                 </div>
-                <div className="flex px-4 gap-x-2 m-auto">
+                <div className="flex px-7 gap-x-2 m-auto">
                     <div className="m-auto">
-                        <CalendarRangeIcon className="m-auto" size={16}/>
+                        {/* <CalendarRangeIcon className="m-auto" size={22}/> */}
                     </div>
-                    <div className="m-auto">
-                        {tender.publish_date}
+                    <div className="m-auto flex">
+                        <div className="m-auto">
+                            {NumbersHelper.toArabicDigits(DateTimeHelper.fmtShortDate(tender.publish_date ?? ''))}
+                        </div>
                     </div>
                 </div>
             </div>

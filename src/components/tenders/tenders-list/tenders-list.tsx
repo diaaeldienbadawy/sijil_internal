@@ -4,7 +4,7 @@ import TenderCard from "../tender-card/tender-card";
 import CustomPagination from "@/components/layout/custom-pagination";
 
 export default function TendersList(){
-    const {dataList,isLoading, error, firstLoad} = useTendersList()
+    const {dataList,isLoading, error, firstLoad,filters} = useTendersList()
 
     console.log("datalist ", dataList)
 
@@ -16,7 +16,7 @@ export default function TendersList(){
                     <>
                     {
                         dataList.items.length ?(
-                        dataList.items.map((item,index)=><TenderCard key={index} tender={item} />)
+                        dataList.items.map((item,index)=><TenderCard key={index} tender={item}/>)
                         ):<div className="h-full flex items-center justify-center">no tenders available</div>
                     }
                     <CustomPagination 

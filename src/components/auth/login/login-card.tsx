@@ -19,6 +19,8 @@ export default function LoginCard(){
         clearError
     } = useLoginCard()
 
+    console.log("error ", error)
+
     return(
         <div className="p-1 m-auto">
             <Card className="min-w-[250px] sm:min-w-[440px] w-full bg-paper p-0 shadow-deep gab-0 rounded-3xl">

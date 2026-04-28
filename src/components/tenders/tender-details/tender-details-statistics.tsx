@@ -1,3 +1,5 @@
+import { DateTimeHelper } from "@/lib/helpers/date-time-helper";
+import NumbersHelper from "@/lib/helpers/numbers-helper";
 import { Tender } from "@/lib/models/tenders/tender";
 
 interface Props{
@@ -9,19 +11,19 @@ export default function TenderDetailsStatistics({tender}:Props){
         <div className="tender-details-statistics flex flex-wrap">
             <div className="statistic">
                 <div>الرقم المرجعي</div>
-                <div>{tender.reference_number}</div>
+                <div>{DateTimeHelper.dashToSlash(NumbersHelper.toArabicDigits(tender.reference_number??''))}</div>
             </div>
             <div className="statistic">
                 <div>تاريخ النشر</div>
-                <div>{tender.publish_date}</div>
+                <div>{DateTimeHelper.dashToSlash(NumbersHelper.toArabicDigits(tender.publish_date??''))}</div>
             </div>
             <div className="statistic">
                 <div>قيمة الوثائق</div>
-                <div>{tender.documents_price_sar} ر.س</div>
+                <div>{DateTimeHelper.dashToSlash(NumbersHelper.toArabicDigits(tender.documents_price_sar??''))} ر.س</div>
             </div>
             <div className="statistic">
                 <div>الوقت المتبقى</div>
-                <div>{tender.remaining_time_text}</div>
+                <div>{DateTimeHelper.dashToSlash(NumbersHelper.toArabicDigits(tender.remaining_time_text??''))}</div>
             </div>
         </div>
     )

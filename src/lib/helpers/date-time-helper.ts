@@ -20,4 +20,19 @@ export class DateTimeHelper{
         return d;
       }
     }
+
+    static fmtShortDate(d:string|undefined|null){
+      if(!d)return '—';
+      try{
+        return format(parseISO(d),'d MMM yyyy',{locale:ar});
+      }
+      catch
+      {
+        return d;
+      }
+    }
+
+    static dashToSlash(d:string){
+      return d.replaceAll('-', '/');
+    }
 }

@@ -13,3 +13,85 @@
 .input-field:focus{
     outline: var(--color-gold-light) 1px solid;
 }
+
+.reactive-tab{
+    font-family: var(--tajawal-font-family);
+    color: var(--color-primary);
+    font-size: medium;
+    padding: 5px 15px;
+}
+
+.reactive-tab.selected{
+    border-bottom: 2px solid var(--color-primary-light);
+    transition: all ease-in-out 0.3s;
+}
+
+.spin-border-btn {
+  position: relative;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 2px solid transparent;
+  color: white;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* الخلفية اللي بتلف */
+.spin-border-btn::before {
+  content: "";
+  position: absolute;
+  inset: -50%; 
+  height: 600%;
+  width: 100%;
+  top: -250%;
+  right: 0%;
+  /* background: conic-gradient(
+    red,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    violet,
+    red
+  ); */
+
+  background: conic-gradient(
+    var(--color-gold),
+    var(--color-gold-light),
+    var(--color-primary),
+    var(--color-primary-light),
+    var(--color-paper),
+    var(--color-primary-light),
+    var(--color-primary),
+    var(--color-gold-light),
+    var(--color-gold)
+  );
+
+  animation: rotate linear infinite;
+  animation-duration: 20s;
+  z-index: -1;
+}
+
+.spin-border-btn:hover::before{
+    animation-duration: 3s;
+}
+
+ .spin-border-btn::after {
+  content: "";
+  position: absolute;
+  inset: 2px; 
+  background: inherit;
+  background-size: 500%;
+  border-radius: 5px;
+  z-index: -1;
+} 
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

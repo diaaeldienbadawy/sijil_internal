@@ -1,6 +1,6 @@
 import useCustomPagination from "@/components/layout/hooks/use-custom-pagination";
 import TenderListParams from "@/lib/api/params/tender-list-params";
-import { TenderSearchMode } from "@/lib/api/params/tender-search-mode";
+import { TenderSearchMode } from "@/lib/models/tenders/tender-search-mode";
 import { getTenders } from "@/lib/api/requests/get-tenders";
 import TenderHelper from "@/lib/helpers/tender-helper";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";

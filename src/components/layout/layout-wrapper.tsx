@@ -9,9 +9,12 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
 
   if (pathname.startsWith('/user')) {
     return (
-      <div className="w-full h-[100%] bg-cream flex justify-center overflow-auto py-[70px]">
-        <div className="max-w-[1400px] px-2 w-full">
-          {children}
+      <div className="w-full h-[100%] bg-cream flex justify-center overflow-auto py-[60px] header-bg">
+        <div className="max-w-[1400px] px-2 w-full" style={{zIndex:1}}>
+          <PopoverDialog />
+    
+                    {children}
+
         </div>
         <NavBar />
       </div>

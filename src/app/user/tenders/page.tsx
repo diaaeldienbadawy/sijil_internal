@@ -9,7 +9,7 @@ import TendersFilter from "@/components/tenders/tenders-pager-filter/tenders-fil
 export default function TendersPage(){
 
     return(
-        <div className="h-[100%] flex flex-col">
+        <div className="h-[100%] flex flex-col gap-5">
             <TendersPageHeader/>
             <TendersFilter/>
             <TendersList/>

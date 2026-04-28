@@ -9,7 +9,9 @@ import {
   InputGroupInput,
   InputGroupText,
 } from "@/components/ui/input-group"
-import { TenderSearchMode } from "@/lib/api/params/tender-search-mode"
+import { TenderSearchMode } from "@/lib/models/tenders/tender-search-mode"
+import { useAppDispatch } from "@/lib/redux/hooks"
+import { JudgesSearchMode } from "@/lib/models/judges/judges-search-mode"
 
 interface Props{
     className?: string
@@ -17,13 +19,14 @@ interface Props{
     value?:string
     setValue?:Dispatch<SetStateAction<string|undefined>>
     placeholder?:string
-    searchMode?: TenderSearchMode
-    setSearchMode?:(mode:TenderSearchMode)=>void
+    searchMode?: JudgesSearchMode | TenderSearchMode
+    setSearchMode?:(mode:JudgesSearchMode | TenderSearchMode)=>void
+    type:string
 }
 
-export default function SearchInput({className,id,value,setValue,placeholder,searchMode,setSearchMode}:Props){
+export default function SearchInput({className,id,type,value,setValue,placeholder,searchMode,setSearchMode}:Props){
     const ref = useRef<HTMLInputElement>(null)
-    
+
     useEffect(()=>{ 
         if(ref.current){
             if(ref.current.value){
@@ -31,6 +34,10 @@ export default function SearchInput({className,id,value,setValue,placeholder,sea
             }
         }
     },[])
+
+    useEffect(()=>{
+        console.log("search mode is ", searchMode)
+    },[searchMode])
 
     return(
           <InputGroup className={` ${className} flex flex-wrap md:flex-nowrap`}>
@@ -46,30 +53,72 @@ export default function SearchInput({className,id,value,setValue,placeholder,sea
             />
             <InputGroupAddon className="py-2 md:py-0" align="inline-end">
               <div className="flex gap-2 px-2">
-                <div className="flex justify-center items-center">
-                    <div 
-                        className= {`search-mode ${searchMode === "smart" ? "selected-search-mode" : ""}`}
-                        onClick={()=>setSearchMode?.("smart")}    
-                        >
-                        تلقائي
-                    </div>
-                </div>
-                <div className="flex justify-center items-center">
-                    <div 
-                        className= {`search-mode ${searchMode === "phrase" ? "selected-search-mode" : ""}`}
-                        onClick={()=>setSearchMode?.("phrase")}    
-                        >
-                        عبارات
-                    </div>
-                </div>
-                <div className="flex justify-center items-center">
-                    <div 
-                        className= {`search-mode ${searchMode === "tokens" ? "selected-search-mode" : ""}`}
-                        onClick={()=>setSearchMode?.("tokens")}    
-                        >
-                        مقاطع
-                    </div>
-                </div>
+                {
+                    type == 'tenders'?(
+                    <>
+                        <div className="flex justify-center items-center">
+                            <div 
+                                className= {`search-mode ${searchMode  === "smart" ? "selected-search-mode" : ""}`}
+                                onClick={()=>setSearchMode?.('smart')}    
+                                >
+                                تلقائي
+                            </div>
+                        </div>
+                        <div className="flex justify-center items-center">
+                            <div 
+                                className= {`search-mode ${searchMode  === "phrase" ? "selected-search-mode" : ""}`}
+                                onClick={()=>setSearchMode?.('phrase')}    
+                                >
+                                جمل
+                            </div>
+                        </div>
+                        <div className="flex justify-center items-center">
+                            <div 
+                                className= {`search-mode ${searchMode  === "tokens" ? "selected-search-mode" : ""}`}
+                                onClick={()=>setSearchMode?.('tokens')}    
+                                >
+                               كلمات
+                            </div>
+                        </div>
+                    </>
+                    ):
+                    type == 'judges'? (
+                        <>
+                        <div className="flex justify-center items-center">
+                            <div 
+                                className= {`search-mode ${searchMode === "any" ? "selected-search-mode" : ""}`}
+                                onClick={()=>setSearchMode?.("any")}    
+                                >
+                                اي كلمة
+                            </div>
+                        </div>
+                        <div className="flex justify-center items-center">
+                            <div 
+                                className= {`search-mode ${searchMode === "all" ? "selected-search-mode" : ""}`}
+                                onClick={()=>setSearchMode?.("all")}    
+                                >
+                                جميع الكلمات
+                            </div>
+                        </div>
+                        <div className="flex justify-center items-center">
+                            <div 
+                                className= {`search-mode ${searchMode === "exact" ? "selected-search-mode" : ""}`}
+                                onClick={()=>setSearchMode?.("exact")}    
+                                >
+                                مطابقة
+                            </div>
+                        </div>
+                        <div className="flex justify-center items-center">
+                            <div 
+                                className= {`search-mode ${searchMode === "exact_number" ? "selected-search-mode" : ""}`}
+                                onClick={()=>setSearchMode?.("exact_number")}    
+                                >
+                                رقم القضية/الحكم
+                            </div>
+                        </div>
+                    </>
+                    ):null
+                }
             </div>
             </InputGroupAddon>
           </InputGroup>

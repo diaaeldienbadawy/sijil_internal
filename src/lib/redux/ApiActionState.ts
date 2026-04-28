@@ -1,3 +1,4 @@
+import { ApiError } from "../api/responses/api-error";
 
 export interface ApiActionState<T> {
     data? : T ;

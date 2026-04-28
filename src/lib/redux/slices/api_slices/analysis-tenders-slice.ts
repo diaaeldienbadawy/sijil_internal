@@ -17,14 +17,15 @@ export const analysisTendersIdsSlice = createSlice(
             })
             .addCase(getAnalysisTenderIds.rejected, (state,action)=>{
                 state.isLoading = false;
-                state.error = action.error.message || "Api Failed"
+                state.error = action.payload?.detail
+                state.data = undefined
                 return state
             })
             .addCase(getAnalysisTenderIds.fulfilled, (state,action)=>{
                 const payload = action.payload as string[] | undefined;
                 state.isLoading = false;
                 state.error = undefined;
-                state.data = state.data ? [...state.data, ...(payload ?? [])] : (payload ?? [])
+                state.data = state.data ? [...(state.data as string[]), ...(payload ?? [])] : (payload ?? [])
                 return state
             })
         }

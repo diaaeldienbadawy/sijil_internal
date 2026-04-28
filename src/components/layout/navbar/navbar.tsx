@@ -13,6 +13,10 @@ export default function NavBar() {
     { path: "/user/judges", label: "الاحكام", icon: Paperclip },
   ];
 
+  const logout = async ()=>{
+    router.push("/auth/login")
+  }
+
   return (
     <div className="navbar-container">
       <div className="navbar">
@@ -51,7 +55,7 @@ export default function NavBar() {
 
         {/* logout */}
         <div
-          onClick={() => router.push("/login")}
+          onClick={logout}
           className="flex items-center px-3 py-2 rounded-full bg-cream-light"
         >
           <LucideLogOut className="rotate-180 m-auto" />

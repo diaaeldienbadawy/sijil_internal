@@ -6,6 +6,7 @@ export default function useTendersList(){
     const [firstLoad, setFirstLoad] = useState(false)
 
     const {data:dataList,isLoading,error} = useAppSelector((state)=>state.tenders)
+    const filters = useAppSelector(state=>state.tenderFilterParameters)
     const dispatch = useAppDispatch()
 
     useEffect(()=>{
@@ -13,5 +14,5 @@ export default function useTendersList(){
         setFirstLoad(true)
     },[dataList])
 
-    return({dataList,isLoading,error,firstLoad})
+    return({dataList,isLoading,error,firstLoad,filters})
 }

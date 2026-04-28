@@ -1,3 +1,5 @@
+import { DateTimeHelper } from "@/lib/helpers/date-time-helper";
+import NumbersHelper from "@/lib/helpers/numbers-helper";
 import { Tender } from "@/lib/models/tenders/tender";
 import { CalendarRangeIcon } from "lucide-react";
 
@@ -14,10 +16,10 @@ export default function TenderDetailsHeader({tender}:Props){
                 </div>
                 <div className="flex px-4 gap-x-2 m-auto">
                     <div className="m-auto">
-                        <CalendarRangeIcon className="m-auto" size={16}/>
+                        {/* <CalendarRangeIcon className="m-auto" size={16}/> */}
                     </div>
                     <div className="m-auto">
-                        {tender.publish_date}
+                        {DateTimeHelper.dashToSlash(NumbersHelper.toArabicDigits(tender.publish_date??''))}
                     </div>
                 </div>
             </div>

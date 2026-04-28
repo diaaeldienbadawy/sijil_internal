@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { getInitialApiState } from "../../ApiActionState"
 import { loginRequest } from "@/lib/api/requests/login-request"
-import { TokenResponse } from "@/lib/api/responses/token-response"
+import { TokenResponse } from "@/types"
+import { ApiError } from "@/lib/api/responses/api-error"
 
 export const loginSlice = createSlice(
     {
@@ -16,13 +17,17 @@ export const loginSlice = createSlice(
             })
             .addCase(loginRequest.rejected, (state,action)=>{
                 state.isLoading = false;
-                state.error = action.error.message || "Api Failed"
+                state.error = action.payload?.detail
+                state.data = undefined
                 return state
             })
             .addCase(loginRequest.fulfilled, (state,action)=>{
                 state.isLoading = false;
-                state.error = undefined;
-                state.data = action.payload
+                if(action.payload){
+                    state.data = action.payload as TokenResponse
+                    state.error = undefined;
+                }
+
                 return state
             })
         }

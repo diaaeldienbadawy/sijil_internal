@@ -1,3 +1,4 @@
+import NumbersHelper from "@/lib/helpers/numbers-helper";
 import { JudgmentSummary } from "@/lib/models/judges/judgment-summary";
 
 export default function JudgeCardHeader({judge}:{judge:JudgmentSummary}){
@@ -17,7 +18,7 @@ export default function JudgeCardHeader({judge}:{judge:JudgmentSummary}){
                 </div>
             </div>
             <div>
-                رقم الحكم / {judge.judgment_number}
+                رقم الحكم / {NumbersHelper.toArabicDigits(judge.judgment_number)}
             </div>
         </div>
         )

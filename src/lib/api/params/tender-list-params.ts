@@ -1,4 +1,4 @@
-import { TenderSearchMode } from "./tender-search-mode";
+import { TenderSearchMode } from "../../models/tenders/tender-search-mode";
 
 export default interface TenderListParams {
   search?: string;

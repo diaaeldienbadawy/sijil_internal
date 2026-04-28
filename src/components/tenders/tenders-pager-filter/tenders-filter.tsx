@@ -40,15 +40,17 @@ export default function TendersFilter(){
                         <SearchInput
                             className="tenders-search-field"
                             value={filters.search.value}
-                            setValue={setSearch}
+                            setValue={(e)=>dispatch(setSearch(e))}
                             placeholder="ابحث في المناقصات"
                             searchMode={filters.search_mode.value}
-                            setSearchMode={setSearchMode}
+                            setSearchMode={(e)=>dispatch(setSearchMode(e))}
+                            type="tenders"
+
                         />
                     </div>
                     <div className="flex  flex-col gap-4 py-2 md:px-2 justify-start w-[100%] md:w-auto">
                         <div className="w-full  h-full">
-                            <select className="add-filter-select w-full min-w-[200px]" value={filters.competition_status.value?? 'default'} onChange={(e)=>setCompetitionStatus(e.target.value)}>
+                            <select className="add-filter-select w-full min-w-[200px]" value={filters.competition_status.value} onChange={(e)=> { dispatch(setCompetitionStatus(e.target.value))}}>
                                 <option value="default" disabled defaultChecked >حالة المنافسة</option>
                                 {
                                     tenderStateList.map((state,index)=>(
@@ -65,13 +67,13 @@ export default function TendersFilter(){
                             </div>
                             <div 
                                 className={`my-auto border border-1 border-gray-300 py-1 px-5 rounded-xl cursor-pointer ${filters.awarding_published.value == true ? 'bg-primary-light text-paper':''}`}  
-                                onClick={()=>setAwardingPublished(filters.awarding_published.value == true ? undefined : true)}    
+                                onClick={()=>dispatch(setAwardingPublished(filters.awarding_published.value == true ? undefined : true))}    
                             >
                                 نعم
                             </div>
                             <div 
                                 className={`my-auto border border-1 border-gray-300 py-1 px-5 rounded-xl cursor-pointer ${filters.awarding_published.value == false ? 'bg-primary-light text-paper':''}`}
-                                onClick={()=>setAwardingPublished(filters.awarding_published.value == false ? undefined : false)}   
+                                onClick={()=>dispatch(setAwardingPublished(filters.awarding_published.value == false ? undefined : false))}   
                             >
                                 لا
                             </div>

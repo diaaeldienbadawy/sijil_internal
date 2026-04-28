@@ -1,0 +1,26 @@
+import { JudgeDetailsResponse } from "@/lib/api/responses/judge-details-response";
+import NumbersHelper from "@/lib/helpers/numbers-helper";
+import { JudgmentDetail } from "@/lib/models/judges/judgement-details";
+import { Tender } from "@/lib/models/tenders/tender";
+import { CalendarRangeIcon } from "lucide-react";
+
+interface Props{
+    judgement:JudgeDetailsResponse
+}
+
+export default function JudgesDetailsHeader({judgement}:Props){
+    return(
+        <div className="flex justify-between tender-details-header">
+            <div className="flex">
+                <div>
+                    {NumbersHelper.toArabicDigits(judgement.initial_judgment.judgment_number)}
+                </div>
+                <div className="flex px-4 gap-x-2 m-auto">
+                    <div className="m-auto">
+                        {NumbersHelper.toArabicDigits(judgement.initial_judgment.court_name)}
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}

@@ -1,3 +1,4 @@
+import NumbersHelper from "@/lib/helpers/numbers-helper";
 import { Tender } from "@/lib/models/tenders/tender";
 
 interface Props{
@@ -9,23 +10,23 @@ export default function TenderDetailsCompetionSection({tender}:Props){
         <div className="tender-details-dates">
             <div className="tender-details-date">
                 <div className="text-muted">الغرض</div>
-                <div>{tender.purpose}</div>
+                <div>{NumbersHelper.toArabicDigits(tender.purpose??'')}</div>
             </div>
             <div className="tender-details-date">
                 <div className="text-muted">طريقة التقديم</div>
-                <div>{tender.submission_method}</div>
+                <div>{NumbersHelper.toArabicDigits(tender.submission_method??'')}</div>
             </div>
             <div className="tender-details-date">
                 <div className="text-muted">مدة العقد</div>
-                <div>{tender.agreement_duration}</div>
+                <div>{NumbersHelper.toArabicDigits(tender.agreement_duration??'')}</div>
             </div>
             <div className="tender-details-date">
                 <div className="text-muted">الضمان الابتدائي</div>
-                <div>{tender.preliminary_guarantee}</div>
+                <div>{NumbersHelper.toArabicDigits(tender.preliminary_guarantee??'')}</div>
             </div>
             <div className="tender-details-date">
                 <div className="text-muted">التأمين المطلوب</div>
-                <div>{tender.insurance_required}</div>
+                <div>{NumbersHelper.toArabicDigits(tender.insurance_required??'')}</div>
             </div>
         </div>
     )

@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { NextResponse } from "next/server";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import {TokenResponse} from '../../../lib/api/responses/token-response'
 
 export default function useLoginCard(){
     const [username,setUserName] = useState<string|undefined>()
@@ -18,8 +19,9 @@ export default function useLoginCard(){
     const dispatch = useAppDispatch()
 
     useEffect(()=>{
+        console.log("data error", dataError)
         setError(dataError)
-    },[])
+    },[dataError])
 
     useEffect(()=>{
         onSuccessLogin()
@@ -28,12 +30,13 @@ export default function useLoginCard(){
     const onSuccessLogin = async()=>{
         console.log("data changed", data)
         if(data){
-            console.log("data is", data)
-            if(data.access_token) {
-                console.log("accessToken is", data.access_token)
-                await cookieStore.set('access_token', data.access_token)
-                router.push('http://localhost:3000/user/tenders')
-                //NextResponse.redirect('/tenders')
+
+                const dataa = data as TokenResponse
+                if(dataa.access_token) {
+                    await cookieStore.set('access_token', dataa.access_token)
+                    router.push('http://localhost:3000/user/tenders')
+                    //NextResponse.redirect('/tenders')
+                
             }
         }
     }

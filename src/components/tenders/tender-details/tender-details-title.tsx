@@ -1,3 +1,5 @@
+import { DateTimeHelper } from "@/lib/helpers/date-time-helper";
+import NumbersHelper from "@/lib/helpers/numbers-helper";
 import { Tender } from "@/lib/models/tenders/tender";
 import { Building } from "lucide-react";
 
@@ -9,11 +11,11 @@ export default function TenderDetailsTitle({tender}:Props){
     return(
         <div className="tender-details-title">
             <div className="title">
-                {tender.name}
+                {NumbersHelper.toArabicDigits(tender.name)}
             </div>
             <div className="agency">
                 <Building className="my-auto" size={18}/>
-                {tender.agency_name}
+                {DateTimeHelper.dashToSlash(NumbersHelper.toArabicDigits(tender.agency_name??''))}
             </div>
         </div>
     )

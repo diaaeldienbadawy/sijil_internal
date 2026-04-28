@@ -1,0 +1,1 @@
+export type JudgesSearchMode = 'any'| 'all' | 'exact_number' | 'exact';

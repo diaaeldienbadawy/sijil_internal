@@ -1,3 +1,4 @@
+import NumbersHelper from "../helpers/numbers-helper";
 import { JudgesSearchParams } from "./params/judges-search-params";
 import TenderListParams from "./params/tender-list-params";
 
@@ -19,7 +20,7 @@ const withQuery = (path: string, params?: Record<string, string | number | boole
   path = buildBase(path)
   
   Object.entries(params ?? {}).forEach(([key, value]) => {
-    if (value != undefined) search.append(key, String(value));
+    if (value != undefined) search.append(key, NumbersHelper.toEnglishDigits(String(value)));
   });
 
   const query = search.toString();
@@ -32,7 +33,7 @@ const judgesWithQuery = (path: string, params?: Record<string, string | number |
   path = buildJudgesBase(path)
   
   Object.entries(params ?? {}).forEach(([key, value]) => {
-    if (value != undefined) search.append(key, String(value));
+    if (value != undefined) search.append(key, NumbersHelper.toEnglishDigits( String(value)));
   });
 
   const query = search.toString();
@@ -49,7 +50,8 @@ export const API_ENDPOINTS = {
       LIST:(params?:TenderListParams) => withQuery('/tenders',params as Record<string, string | number | boolean | undefined> | undefined)
     },
     JUDGES :{
-      JUDGEMENT:(id:string)=>buildJudgesBase(`/`),
+      Filters: buildJudgesBase('/filters'),
+      JUDGEMENT:(caseIndex:number)=>buildJudgesBase(`/detail?index=${caseIndex}`),
       LIST : (params?:JudgesSearchParams) => judgesWithQuery('/search',params as Record<string, string | number | boolean | undefined> | undefined)
     }
 }

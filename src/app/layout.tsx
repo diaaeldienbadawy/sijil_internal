@@ -19,6 +19,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
                 <Suspense fallback={<MutatingDots/>}>
                     <StoreProvider>
                         <LayoutWrapper>
+                            
                             {children}
                         </LayoutWrapper>
                     </StoreProvider>

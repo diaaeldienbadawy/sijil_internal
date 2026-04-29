@@ -5,12 +5,13 @@ import TenderListParams from "../params/tender-list-params";
 import { Tender } from "@/lib/models/tenders/tender";
 import { AxiosError } from "axios";
 import { ApiError } from "../responses/api-error";
+import { PayloadedRequestArgs } from "./request-args";
 
-export const getTender = createAsyncThunk<Tender,string,{ rejectValue: ApiError }>(
+export const getTender = createAsyncThunk<Tender,PayloadedRequestArgs<string,Tender>,{ rejectValue: ApiError }>(
     'tender',
-    async(id:string,{rejectWithValue})=>{
+    async({data,onSuccess,onError,accessToken},{rejectWithValue})=>{
         try{
-        return FetchHelper.get<Tender>(API_ENDPOINTS.TENDER.TENDER(id),{needAuthorization:true})
+        return FetchHelper.get<Tender>(API_ENDPOINTS.TENDER.TENDER(data),{accessToken,onSuccess,onError})
                     } catch (e) {
                       const error = e as AxiosError<ApiError>;
                 

@@ -1,7 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { getInitialApiState } from "../../ApiActionState"
-import { Tender } from "@/lib/models/tenders/tender"
-import { getTender } from "@/lib/api/requests/get-tender-request"
 
 export const tenderDetailsId = createSlice({
     name:'tenderDetailsId', 

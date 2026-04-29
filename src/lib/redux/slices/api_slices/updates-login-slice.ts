@@ -1,29 +1,29 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { getInitialApiState } from "../../ApiActionState"
-import { getTenders } from "@/lib/api/requests/get-tenders"
-import { TenderListResponse } from "@/lib/api/responses/tenders-list-response"
+import { TokenResponse } from "@/lib/api/responses/token-response"
+import { updatesLoginRequest } from "@/lib/api/requests/updates-login-request"
 
-export const tendersSlice = createSlice(
+export const updatesLoginSlice = createSlice(
     {
-        name:'tenders', 
-        initialState : getInitialApiState<TenderListResponse>(),
+        name:'updates-login', 
+        initialState : getInitialApiState<TokenResponse>(),
         reducers:{},
         extraReducers:(builder)=>{
-            builder.addCase(getTenders.pending,(state)=>{
+            builder.addCase(updatesLoginRequest.pending,(state)=>{
                 state.isLoading = true;
                 state.error = undefined;
                 return state
             })
-            .addCase(getTenders.rejected, (state,action)=>{
+            .addCase(updatesLoginRequest.rejected, (state,action)=>{
                 state.isLoading = false;
                 state.error = action.payload?.detail
                 state.data = undefined
                 return state
             })
-            .addCase(getTenders.fulfilled, (state,action)=>{
+            .addCase(updatesLoginRequest.fulfilled, (state,action)=>{
                 state.isLoading = false;
                 state.error = undefined;
-                state.data = action.payload as TenderListResponse
+                state.data = action.payload as TokenResponse
                 return state
             })
         }

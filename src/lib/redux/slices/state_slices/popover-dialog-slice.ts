@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { tenderDetailsId } from "./tender-details-id"
+import { tenderDetailsId } from "./tender-details-id-slice"
 import { ReactNode } from "react"
 
 export const popoverDialog = createSlice({

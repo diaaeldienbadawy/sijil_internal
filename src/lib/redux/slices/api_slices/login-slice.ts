@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { getInitialApiState } from "../../ApiActionState"
 import { loginRequest } from "@/lib/api/requests/login-request"
-import { TokenResponse } from "@/types"
-import { ApiError } from "@/lib/api/responses/api-error"
+import { TokenResponse } from "@/lib/api/responses/token-response"
 
 export const loginSlice = createSlice(
     {

@@ -1,12 +1,8 @@
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
 } from "@/components/ui/pagination"
-import page from "@/oldApp/tenders/[id]/page"
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { useMemo } from "react"
 import useCustomPagination from "./hooks/use-custom-pagination"
 
 

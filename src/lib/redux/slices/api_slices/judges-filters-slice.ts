@@ -1,7 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { getInitialApiState } from "../../ApiActionState"
-import { loginRequest } from "@/lib/api/requests/login-request"
-import { TokenResponse } from "@/lib/api/responses/token-response"
 import { JudgesFiltersResponse } from "@/lib/api/responses/judges-filters-response"
 import { getJudgesFilters } from "@/lib/api/requests/get-judges-filters"
 

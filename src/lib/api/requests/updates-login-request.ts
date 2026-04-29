@@ -2,23 +2,23 @@ import { createAsyncThunk } from "@reduxjs/toolkit"
 import { API_ENDPOINTS } from "../endpoints"
 import { FetchHelper } from "../fetch-helper"
 import { LoginPayload } from "../payload-data/login-payload";
+import { ApiError } from "../responses/api-error";
 import { TokenResponse } from "../responses/token-response";
 import { AxiosError } from "axios";
 import { PayloadedRequestArgs } from "./request-args";
-import { ApiError } from "../responses/api-error";
 
 
-export const loginRequest = createAsyncThunk<
+export const updatesLoginRequest = createAsyncThunk<
   TokenResponse,
   PayloadedRequestArgs<LoginPayload,TokenResponse>,
   { rejectValue: ApiError }
 >(
   'login',
-  async ({data,onError,onSuccess,accessToken}, { rejectWithValue }) => {
+  async ({data, onSuccess , onError,accessToken}, { rejectWithValue }) => {
     try {
       const response = await FetchHelper.postForm<LoginPayload, TokenResponse>(
-        API_ENDPOINTS.AUTH.LOGIN,
-        { data ,onError,onSuccess,accessToken}
+        API_ENDPOINTS.UPDATES_AUTH.LOGIN,
+        { data , onError, onSuccess, accessToken},false
       );
 
       return response; 

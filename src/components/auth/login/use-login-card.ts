@@ -61,7 +61,7 @@ export default function useLoginCard(){
     const loginAction = async()=>{
         if(validate()){
             setError(undefined)
-            dispatch(loginRequest({username: username!,password:password!}))
+            dispatch(loginRequest({data:{username: username!,password:password!}}))
         }
     }
 

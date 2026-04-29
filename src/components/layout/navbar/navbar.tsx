@@ -8,9 +8,10 @@ export default function NavBar() {
   const router = useRouter();
   const pathname = usePathname();
 
-  const tabs = [
+  const tabs:{path:string, label:string, icon: any}[] = [
     { path: "/user/tenders", label: "المناقصات", icon: ListCheck },
     { path: "/user/judges", label: "الاحكام", icon: Paperclip },
+    { path: "/user/updates", label: 'تحديثات الشركات' ,icon: Paperclip}
   ];
 
   const logout = async ()=>{

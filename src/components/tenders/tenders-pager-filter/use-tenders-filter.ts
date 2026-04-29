@@ -5,6 +5,7 @@ import { getTenders } from "@/lib/api/requests/get-tenders";
 import TenderHelper from "@/lib/helpers/tender-helper";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import { useEffect, useState } from "react";
+import useRequest from "@/lib/api/requests/use-request";
 
 
 export default function useTendersFilter(){
@@ -14,9 +15,16 @@ export default function useTendersFilter(){
 
     const filters = useAppSelector(state=>state.tenderFilterParameters)
 
+    const {callApi} = useRequest()
+
     async function searchAction() {
         const params = TenderHelper.createFiltersString({filters,page:currentPage,limit:20})
-        dispatch(getTenders(params))
+
+        callApi({
+            request:getTenders,
+            platform:'tenders',
+            args:{data:params}
+        })
     }
 
     useEffect(()=>{

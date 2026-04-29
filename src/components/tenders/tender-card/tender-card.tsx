@@ -6,7 +6,7 @@ import CardDescription from "./card-description"
 import CardFooter from "./card-footer"
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks"
 import TenderDetails from "../tender-details/tender-details"
-import { changeTenderDetailsId } from "@/lib/redux/slices/state_slices/tender-details-id"
+import { changeTenderDetailsId } from "@/lib/redux/slices/state_slices/tender-details-id-slice"
 import { openPopoverDialog } from "@/lib/redux/slices/state_slices/popover-dialog-slice"
 
 interface Props{

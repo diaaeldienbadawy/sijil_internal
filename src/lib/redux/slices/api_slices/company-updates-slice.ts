@@ -1,29 +1,29 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { getInitialApiState } from "../../ApiActionState"
-import { getTenders } from "@/lib/api/requests/get-tenders"
-import { TenderListResponse } from "@/lib/api/responses/tenders-list-response"
+import { CompaniesListResponse } from "@/lib/api/responses/companies-list-response"
+import { getCompanyUpdates } from "@/lib/api/requests/get-companies"
 
-export const tendersSlice = createSlice(
+export const companyUpdatesSlice = createSlice(
     {
         name:'tenders', 
-        initialState : getInitialApiState<TenderListResponse>(),
+        initialState : getInitialApiState<CompaniesListResponse>(),
         reducers:{},
         extraReducers:(builder)=>{
-            builder.addCase(getTenders.pending,(state)=>{
+            builder.addCase(getCompanyUpdates.pending,(state)=>{
                 state.isLoading = true;
                 state.error = undefined;
                 return state
             })
-            .addCase(getTenders.rejected, (state,action)=>{
+            .addCase(getCompanyUpdates.rejected, (state,action)=>{
                 state.isLoading = false;
                 state.error = action.payload?.detail
                 state.data = undefined
                 return state
             })
-            .addCase(getTenders.fulfilled, (state,action)=>{
+            .addCase(getCompanyUpdates.fulfilled, (state,action)=>{
                 state.isLoading = false;
                 state.error = undefined;
-                state.data = action.payload as TenderListResponse
+                state.data = action.payload as CompaniesListResponse
                 return state
             })
         }

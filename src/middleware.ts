@@ -1,9 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 
+
+const pathes = [
+  '/user/tenders',
+  '/user/judges',
+  '/user/updates'
+]
+
+
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-
-  console.log("cookies ", request.cookies)
 
   if (
     pathname.startsWith('/_next') ||
@@ -13,7 +19,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const token = request.cookies.get('access_token')?.value;
+  /*const token = request.cookies.get('access_token')?.value;
 
   const API_URL = process.env.NEXT_PUBLIC_API_URL!;
   const API_VER = process.env.NEXT_PUBLIC_API_VER!;
@@ -56,10 +62,13 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  // 👇 حماية باقي الصفحات
   if (!token) {
     return NextResponse.redirect(new URL('/auth/login', request.url));
-  }
+  }*/
+
+  console.log("path name " ,pathname)
+
+  if(!pathes.includes(pathname)) return NextResponse.redirect(new URL('/user/tenders', request.url));
 
   return NextResponse.next();
 }

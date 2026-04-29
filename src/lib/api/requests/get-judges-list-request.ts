@@ -5,13 +5,14 @@ import { JudgesSearchResponse } from "../responses/judges-search-response";
 import { API_ENDPOINTS } from "../endpoints";
 import { AxiosError } from "axios";
 import { ApiError } from "../responses/api-error";
+import { PayloadedRequestArgs } from "./request-args";
 
 
-export const getJudgesListRequest = createAsyncThunk<JudgesSearchResponse,JudgesSearchParams,{ rejectValue: ApiError }>(
+export const getJudgesListRequest = createAsyncThunk<JudgesSearchResponse,PayloadedRequestArgs<JudgesSearchParams,JudgesSearchResponse>,{ rejectValue: ApiError }>(
     'get-judges-list' ,
-    async(params:JudgesSearchParams, {rejectWithValue})=>{
+    async({data,onError,onSuccess,accessToken}, {rejectWithValue})=>{
         try{
-            const response = await FetchHelper.get<JudgesSearchResponse>(API_ENDPOINTS.JUDGES.LIST(params),{needAuthorization:false})
+            const response = await FetchHelper.get<JudgesSearchResponse>(API_ENDPOINTS.JUDGES.LIST(data),{accessToken,onError,onSuccess})
             return response            } catch (e) {
                           const error = e as AxiosError<ApiError>;
                     
